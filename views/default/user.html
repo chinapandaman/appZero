@@ -3,59 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Application Zero</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/foundation/5.5.0/css/foundation.css" />
-    <link rel="stylesheet" href="{{=URL('static', 'css/flash.css')}}" />
-    <link rel="stylesheet" href="{{=URL('static', 'css/auth.css')}}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/foundation/5.5.0/css/foundation.css"/>
+    <link rel="stylesheet" href="{{=URL('static', 'css/flash.css')}}"/>
+    <link rel="stylesheet" href="{{=URL('static', 'css/auth.css')}}"/>
 </head>
 <body>
-    <div class="body"></div>
-    <div class="grad"></div>
-    <div class="header">
-        <div><a class="site_icon" href="{{=URL('default', 'index')}}">app<span>Zero</span></a></div>
-    </div>
-    <br>
-    <div class="login">
-        {{=form.custom.begin}}
+<div class="body"></div>
+<div class="grad"></div>
+<div class="header">
+    <div><a class="site_icon" href="{{=URL('default', 'index')}}">app<span>Zero</span></a></div>
+</div>
+<br>
+<div class="login">
+    {{=form.custom.begin}}
 
-        {{if request.args(0) == "register":}}
-        {{=form.custom.widget.first_name}}
-        {{=form.custom.widget.last_name}}
-        {{pass}}
+    {{if request.args(0) == "register":}}
+    {{=form.custom.widget.first_name}}
+    {{=form.custom.widget.last_name}}
+    {{pass}}
 
-        {{=form.custom.widget.email}}
-        {{=form.custom.widget.password}}
+    {{=form.custom.widget.email}}
+    {{=form.custom.widget.password}}
 
-        {{if request.args(0) == "register":}}
-        {{=form.custom.widget.password_two}}
-        {{pass}}
+    {{if request.args(0) == "register":}}
+    {{=form.custom.widget.password_two}}
+    {{pass}}
 
-        {{=form.custom.submit}}
+    {{=form.custom.submit}}
 
-        {{=form.custom.end}}
+    {{=form.custom.end}}
 
-        {{if request.args(0) == "login" and not "register" in auth.settings.actions_disabled:}}
-        <a href="{{=URL('default', 'user/register')}}">{{=T('Need an account?')}}</a>
-        <br/>
-        {{pass}}
-        {{if request.args(0) == "login" and not "retrieve_password" in auth.settings.actions_disabled:}}
-        <a href="{{=URL('default', 'user/retrieve_password')}}">{{=T('Forgot your password?')}}</a>
-        {{pass}}
-        {{if request.args(0) == "register":}}
-        <a href="{{=URL('default', 'user/login')}}">{{=T('Already have an account?')}}</a>
-        {{pass}}
-    </div>
+    {{if request.args(0) == "login" and not "register" in auth.settings.actions_disabled:}}
+    <a href="{{=URL('default', 'user/register')}}">{{=T('Need an account?')}}</a>
+    <br/>
+    {{pass}}
+    {{if request.args(0) == "login" and not "retrieve_password" in auth.settings.actions_disabled:}}
+    <a href="{{=URL('default', 'user/retrieve_password')}}">{{=T('Forgot your password?')}}</a>
+    {{pass}}
+    {{if request.args(0) == "register":}}
+    <a href="{{=URL('default', 'user/login')}}">{{=T('Already have an account?')}}</a>
+    {{pass}}
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js"></script>
-    <script src="{{=URL('static', 'js/flash.js')}}"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            let flash = "{{=response.flash}}";
-            if (flash){
-                alertify.set({ delay: 2000 });
-                alertify.error(flash);
-            }
-        });
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js"></script>
+<script src="{{=URL('static', 'js/flash.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        let flash = "{{=response.flash}}";
+        if (flash){
+            alertify.set({ delay: 2000 });
+            alertify.error(flash);
+        }
+    });
+</script>
 </body>
 </html>
