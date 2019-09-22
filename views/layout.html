@@ -27,7 +27,7 @@
     <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
             <div class="sidebar-brand">
-                <a href="#">pro sidebar</a>
+                <a href="#">Application Zero</a>
                 <div id="close-sidebar">
                     <i class="fas fa-times"></i>
                 </div>
@@ -39,14 +39,12 @@
                          alt="User picture">
                 </div>
                 <div class="user-info">
-          <span class="user-name">Jhon
-            <strong>Smith</strong>
-          </span>
-                    <span class="user-role">Administrator</span>
+                    <span class="user-name">{{=auth.user.first_name}} <strong>{{=auth.user.last_name}}</strong></span>
+                    <span class="user-role">{{=auth.user_groups[1]}}</span>
                     <span class="user-status">
-            <i class="fa fa-circle"></i>
-            <span>Online</span>
-          </span>
+                        <i class="fa fa-circle"></i>
+                        <span>Online</span>
+                    </span>
                 </div>
             </div>
             <!-- sidebar-header  -->
@@ -55,9 +53,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control search-menu" placeholder="Search...">
                         <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </span>
+                            <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
                         </div>
                     </div>
                 </div>
@@ -215,7 +211,7 @@
                 <i class="fa fa-cog"></i>
                 <span class="badge-sonar"></span>
             </a>
-            <a href="#">
+            <a href="{{=URL('default', 'user/logout')}}">
                 <i class="fa fa-power-off"></i>
             </a>
         </div>

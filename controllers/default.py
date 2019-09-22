@@ -6,9 +6,12 @@
 
 
 # ---- example index page ----
+@auth.requires_login()
 def index():
-    response.flash = T("Hello World")
-    return dict(message=T("Welcome to web2py!"))
+    response.flash = "Welcome {first_name} {last_name}".format(
+        first_name=auth.user.first_name, last_name=auth.user.last_name
+    )
+    return dict()
 
 
 # ---- API (example) -----
