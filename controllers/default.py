@@ -7,27 +7,35 @@
 # ---- example index page ----
 def index():
     response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
+    return dict(message=T("Welcome to web2py!"))
+
 
 # ---- API (example) -----
 @auth.requires_login()
 def api_get_user_email():
-    if not request.env.request_method == 'GET': raise HTTP(403)
-    return response.json({'status':'success', 'email':auth.user.email})
+    if not request.env.request_method == "GET":
+        raise HTTP(403)
+    return response.json({"status": "success", "email": auth.user.email})
+
 
 # ---- Smart Grid (example) -----
-@auth.requires_membership('admin') # can only be accessed by members of admin groupd
+@auth.requires_membership("admin")  # can only be accessed by members of admin groupd
 def grid():
-    response.view = 'generic.html' # use a generic view
+    response.view = "generic.html"  # use a generic view
     tablename = request.args(0)
-    if not tablename in db.tables: raise HTTP(403)
-    grid = SQLFORM.smartgrid(db[tablename], args=[tablename], deletable=False, editable=False)
+    if not tablename in db.tables:
+        raise HTTP(403)
+    grid = SQLFORM.smartgrid(
+        db[tablename], args=[tablename], deletable=False, editable=False
+    )
     return dict(grid=grid)
+
 
 # ---- Embedded wiki (example) ----
 def wiki():
-    auth.wikimenu() # add the wiki to the menu
-    return auth.wiki() 
+    auth.wikimenu()  # add the wiki to the menu
+    return auth.wiki()
+
 
 # ---- Action for login/register/etc (required for auth) -----
 def user():
@@ -46,7 +54,14 @@ def user():
     to decorate functions that need access control
     also notice there is http://..../[app]/appadmin/manage/auth to allow administrator to manage users
     """
+
+    form = auth()
+
+    form.custom.widget.email["_placeholder"] = "Email"
+    form.custom.widget.password["_placeholder"] = "Password"
+
     return dict(form=auth())
+
 
 # ---- action to server uploaded static content (required) ---
 @cache.action()
