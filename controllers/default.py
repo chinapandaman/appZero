@@ -60,7 +60,7 @@ def user():
     form.custom.widget.email["_placeholder"] = "Email"
     form.custom.widget.password["_placeholder"] = "Password"
 
-    return dict(form=auth())
+    return dict(form=form)
 
 
 # ---- action to server uploaded static content (required) ---

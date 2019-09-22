@@ -146,3 +146,15 @@ body{
 .site_icon{
     text-decoration: none;
 }
+
+.site_icon:visited {
+    color: #fff;
+}
+
+.site_icon:hover {
+    color: #fff;
+}
+
+.site_icon:active {
+    color: #fff;
+}
