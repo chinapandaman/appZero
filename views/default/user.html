@@ -36,7 +36,7 @@
         <br/>
         {{pass}}
         {{if request.args(0) == "login" and not "retrieve_password" in auth.settings.actions_disabled:}}
-        <a href="{{=URL('default', 'user/retrieve_password')}}">{{=T('Forget your password?')}}</a>
+        <a href="{{=URL('default', 'user/retrieve_password')}}">{{=T('Forgot your password?')}}</a>
         {{pass}}
         {{if request.args(0) == "register":}}
         <a href="{{=URL('default', 'user/login')}}">{{=T('Already have an account?')}}</a>
