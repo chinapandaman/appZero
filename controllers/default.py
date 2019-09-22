@@ -4,6 +4,7 @@
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
 
+
 # ---- example index page ----
 def index():
     response.flash = T("Hello World")
@@ -56,6 +57,11 @@ def user():
     """
 
     form = auth()
+
+    if request.args[0] == "register":
+        form.custom.widget.first_name["_placeholder"] = "First Name"
+        form.custom.widget.last_name["_placeholder"] = "Last Name"
+        form.custom.widget.password_two["_placeholder"] = "Confirm Password"
 
     form.custom.widget.email["_placeholder"] = "Email"
     form.custom.widget.password["_placeholder"] = "Password"

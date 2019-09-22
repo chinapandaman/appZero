@@ -158,3 +158,19 @@ body{
 .site_icon:active {
     color: #fff;
 }
+
+a:link {
+    color: white;
+}
+
+a:visited {
+    color: green;
+}
+
+a:hover {
+    color: yellow;
+}
+
+a:active {
+    color: pink;
+}

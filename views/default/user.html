@@ -9,17 +9,38 @@
     <div class="body"></div>
     <div class="grad"></div>
     <div class="header">
-        <div><a class="site_icon" href="{{=URL('default', 'index')}}">e<span>Printout</span></a></div>
+        <div><a class="site_icon" href="{{=URL('default', 'index')}}">app<span>Zero</span></a></div>
     </div>
     <br>
     <div class="login">
         {{=form.custom.begin}}
 
+        {{if request.args(0) == "register":}}
+        {{=form.custom.widget.first_name}}
+        {{=form.custom.widget.last_name}}
+        {{pass}}
+
         {{=form.custom.widget.email}}
         {{=form.custom.widget.password}}
+
+        {{if request.args(0) == "register":}}
+        {{=form.custom.widget.password_two}}
+        {{pass}}
+
         {{=form.custom.submit}}
 
         {{=form.custom.end}}
+
+        {{if request.args(0) == "login" and not "register" in auth.settings.actions_disabled:}}
+        <a href="{{=URL('default', 'user/register')}}">{{=T('Need an account?')}}</a>
+        <br/>
+        {{pass}}
+        {{if request.args(0) == "login" and not "retrieve_password" in auth.settings.actions_disabled:}}
+        <a href="{{=URL('default', 'user/retrieve_password')}}">{{=T('Forget your password?')}}</a>
+        {{pass}}
+        {{if request.args(0) == "register":}}
+        <a href="{{=URL('default', 'user/login')}}">{{=T('Already have an account?')}}</a>
+        {{pass}}
     </div>
 </body>
 </html>
