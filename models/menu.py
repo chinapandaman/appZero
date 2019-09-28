@@ -5,6 +5,8 @@
 # this is the main application menu add/remove items as required
 # ----------------------------------------------------------------------------------------------------------------------
 
+from app_factory.factory import AppZeroFactory
+
 response.menu = [(T("Home"), False, URL("default", "index"), [])]
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -174,93 +176,4 @@ if not configuration.get("app.production"):
         ),
     ]
 
-
-response.side_bar = [
-    {
-        "section": "General",
-        "items": [
-            {
-                "text": "Dashboard",
-                "icon": "fa-tachometer-alt",
-                "has_sub_item": True,
-                "decoration": {"text": "New", "type": "warning"},
-                "sub_items": [
-                    {
-                        "text": "Dashboard 1",
-                        "decoration": {"text": "Pro", "type": "success"},
-                        "url": "#",
-                    },
-                    {"text": "Dashboard 2", "url": "#"},
-                    {"text": "Dashboard 3", "url": "#"},
-                ],
-            },
-            {
-                "text": "E-commerce",
-                "icon": "fa-shopping-cart",
-                "has_sub_item": True,
-                "decoration": {"text": "3", "type": "danger"},
-                "sub_items": [
-                    {"text": "Products", "url": "#"},
-                    {"text": "Orders", "url": "#"},
-                    {"text": "Credit cart", "url": "#"},
-                ],
-            },
-            {
-                "text": "Components",
-                "icon": "fa-gem",
-                "has_sub_item": True,
-                "sub_items": [
-                    {"text": "General", "url": "#"},
-                    {"text": "Panels", "url": "#"},
-                    {"text": "Tables", "url": "#"},
-                    {"text": "Icons", "url": "#"},
-                    {"text": "Forms", "url": "#"},
-                ],
-            },
-            {
-                "text": "Charts",
-                "icon": "fa-chart-line",
-                "has_sub_item": True,
-                "sub_items": [
-                    {"text": "Pie Chart", "url": "#"},
-                    {"text": "Line Chart", "url": "#"},
-                    {"text": "Bar Chart", "url": "#"},
-                    {"text": "Histogram", "url": "#"},
-                ],
-            },
-            {
-                "text": "Maps",
-                "icon": "fa-globe",
-                "has_sub_item": True,
-                "sub_items": [
-                    {"text": "Google maps", "url": "#"},
-                    {"text": "Open street map", "url": "#"},
-                ],
-            },
-        ],
-    },
-    {
-        "section": "Extra",
-        "items": [
-            {
-                "text": "Documentation",
-                "icon": "fa-book",
-                "has_sub_item": False,
-                "decoration": {"text": "Beta", "type": "primary"},
-                "url": "#",
-            },
-            {
-                "text": "Calendar",
-                "icon": "fa-calendar",
-                "has_sub_item": False,
-                "url": "#",
-            },
-            {
-                "text": "Examples",
-                "icon": "fa-folder",
-                "has_sub_item": False,
-                "url": "#",
-            },
-        ],
-    },
-]
+response.side_bar = AppZeroFactory("view", "menu").build().data

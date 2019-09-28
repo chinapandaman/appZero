@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from gluon import current
 # -------------------------------------------------------------------------
 # AppConfig configuration made easy. Look inside private/appconfig.ini
 # Auth is for authenticaiton and access control
@@ -163,3 +164,5 @@ if configuration.get("scheduler.enabled"):
 # after defining tables, uncomment below to enable auditing
 # -------------------------------------------------------------------------
 # auth.enable_record_versioning(db)
+current.request = request
+current.db = db

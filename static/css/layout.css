@@ -478,3 +478,7 @@ body {
 .chiller-theme .sidebar-footer>a:last-child {
     border-right: none;
 }
+
+body {
+    background-color: #D3D3D3;
+}

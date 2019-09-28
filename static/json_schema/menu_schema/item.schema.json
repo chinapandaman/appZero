@@ -1,0 +1,12 @@
+{
+    "type": "object",
+    "required": ["text", "icon", "has_sub_item"],
+    "properties": {
+        "text": {"type": "string"},
+        "icon": {"type": "string"},
+        "has_sub_item": {"type": "boolean"},
+        "decoration": {"$ref": "decoration.schema.json"},
+        "url": {"type": "string"},
+        "sub_items": {"type": "array", "items": {"$ref": "sub_item.schema.json"}}
+    }
+}
