@@ -1,7 +1,7 @@
 import json
 import os
 
-from jsonschema import validate, RefResolver, ValidationError
+from jsonschema import validate, RefResolver
 
 
 def validate_json_obj(schema_path, schema_name, obj):
@@ -15,7 +15,4 @@ def validate_json_obj(schema_path, schema_name, obj):
         )
         resolver = RefResolver(reference_path, schema)
 
-        try:
-            validate(instance=obj, schema=schema, resolver=resolver)
-        except ValidationError as e:
-            raise Exception(e.message)
+        validate(instance=obj, schema=schema, resolver=resolver)

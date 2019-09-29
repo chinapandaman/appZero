@@ -1,5 +1,20 @@
 {
     "type": "object",
     "required": ["text", "type"],
-    "properties": {"text": {"type": "string"}, "type": {"type": "string"}}
+    "properties": {
+        "text": {"type": "string"},
+        "type": {
+            "type": "string",
+            "enum": [
+                "primary",
+                "secondary",
+                "success",
+                "danger",
+                "warning",
+                "info",
+                "light",
+                "dark"
+            ]
+        }
+    }
 }
