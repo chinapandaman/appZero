@@ -8,6 +8,8 @@ from gluon import current
 from gluon.contrib.appconfig import AppConfig
 from gluon.tools import Auth
 
+from app_factory.factory import AppZeroFactory
+
 # -------------------------------------------------------------------------
 # This scaffolding model makes your app work on Google App Engine too
 # File is released under public domain and you can use without limitations
@@ -159,6 +161,21 @@ if configuration.get("scheduler.enabled"):
 # >>> rows = db(db.mytable.myfield == 'value').select(db.mytable.ALL)
 # >>> for row in rows: print row.id, row.myfield
 # -------------------------------------------------------------------------
+
+for table in AppZeroFactory(layer="model", component="dal").build().data:
+    db.define_table(
+        table["table_name"],
+        *[
+            Field(
+                field["field_name"],
+                type=field["field_type"],
+                length=field.get("field_length", None),
+                required=field.get("field_is_required", False),
+                unique=field.get("field_is_unique", False),
+            )
+            for field in table["table_fields"]
+        ]
+    )
 
 # -------------------------------------------------------------------------
 # after defining tables, uncomment below to enable auditing

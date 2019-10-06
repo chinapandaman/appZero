@@ -1,7 +1,8 @@
 import os
 
-from app_factory.base import AppZero
 from gluon import current
+
+from app_factory.base import AppZero
 
 
 class Menu(AppZero):

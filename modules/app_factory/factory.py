@@ -11,3 +11,12 @@ class AppZeroFactory(object):
             from app_factory.menu.menu import Menu
 
             return Menu()
+
+        if self._component == "model":
+            return self.build_model()
+
+    def build_model(self):
+        if self._component == "dal":
+            from app_factory.model.dal.table import Table
+
+            return Table()
