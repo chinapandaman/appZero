@@ -1,0 +1,34 @@
+[
+    {
+        "table_name": "test1",
+        "table_fields": [
+            {"field_name": "field1", "field_type": "string", "field_length": 8},
+            {
+                "field_name": "field2",
+                "field_type": "boolean",
+                "field_is_required": true
+            },
+            {
+                "field_name": "field3",
+                "field_type": "integer",
+                "field_is_unique": true
+            }
+        ]
+    },
+    {
+        "table_name": "test2",
+        "table_fields": [
+            {"field_name": "field4", "field_type": "string", "field_length": 4},
+            {
+                "field_name": "field5",
+                "field_type": "boolean",
+                "field_is_required": true
+            },
+            {
+                "field_name": "field6",
+                "field_type": "integer",
+                "field_is_unique": true
+            }
+        ]
+    }
+]

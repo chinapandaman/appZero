@@ -12,7 +12,7 @@ class AppZeroFactory(object):
 
             return Menu()
 
-        if self._component == "model":
+        if self._layer == "model":
             return self.build_model()
 
     def build_model(self):

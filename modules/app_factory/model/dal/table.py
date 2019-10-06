@@ -7,7 +7,7 @@ from app_factory.base import AppZero
 
 class Table(AppZero):
     _definition_path = os.path.join(
-        current.request.folder, "static", "json", "model", "dal", "table"
+        current.request.folder, "static", "json", "model", "dal", "table.json"
     )
     _schema_name = "table.schema.json"
     _schema_path = os.path.join(
