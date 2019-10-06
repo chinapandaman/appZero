@@ -1,0 +1,11 @@
+{
+    "type": "array",
+    "items": {
+        "type": "object",
+        "required": ["table_name", "table_fields"],
+        "properties": {
+            "table_name": {"type": "string"},
+            "table_fields": {"type": "array", "items": {"$ref": "field.schema.json"}}
+        }
+    }
+}
