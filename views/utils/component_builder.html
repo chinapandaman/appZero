@@ -4,28 +4,28 @@
     }
 
     function build_grid_row(parent, component_id=null){
-    	$("#" + parent).append('{{include "components/grid_row.min.html"}}');
+        $("#" + parent).append('{{include "components/grid_row.min.html"}}');
 
-    	if (component_id){
-			$("#base_grid_row").attr("id", component_id);
-    	}
+        if (component_id){
+            $("#base_grid_row").attr("id", component_id);
+        }
     }
 
     function build_grid_col(parent, component_id=null, ratio=null){
-    	$("#" + parent).append('{{include "components/grid_col.min.html"}}');
+        $("#" + parent).append('{{include "components/grid_col.min.html"}}');
 
-    	let base_grid_col = $("#base_grid_col");
+        let base_grid_col = $("#base_grid_col");
 
-    	if (component_id){
-			base_grid_col.attr("id", component_id);
-    	}
+        if (component_id){
+            base_grid_col.attr("id", component_id);
+        }
 
-    	if (ratio){
-    		base_grid_col.removeClass(
-    			"col-5"
-			).addClass(
-				"col-" + ratio.toString()
-			);
-    	}
+        if (ratio){
+            base_grid_col.removeClass(
+                "col-5"
+            ).addClass(
+                "col-" + ratio.toString()
+            );
+        }
     }
 </script>
