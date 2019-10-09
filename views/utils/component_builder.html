@@ -28,4 +28,12 @@
             );
         }
     }
+
+    function build_form(parent, component_id=null){
+        $("#" + parent).append('{{include "components/form.min.html"}}');
+
+        if (component_id){
+            $("#base_form").attr("id", component_id);
+        }
+    }
 </script>
