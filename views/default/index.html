@@ -1,8 +1,8 @@
 {{extend 'layout.html'}}
 
-{{include "utils/component_builder.html"}}
 {{block page_js}}
-<script>
+{{include "utils/component_builder.html"}}
+<script type="text/javascript">
     $(document).ready(function(){
         build_main_view_port();
         build_form("main_view_port", "test_form");
