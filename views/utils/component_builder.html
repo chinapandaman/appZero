@@ -36,4 +36,15 @@
             $("#base_form").attr("id", component_id);
         }
     }
+
+    function build_input(parent, display_name, component_id=null){
+        $("#" + parent).append('{{include "components/input_text.min.html"}}');
+
+        if (component_id){
+            $("#base_input").attr("id", component_id);
+            $("#base_input_label").attr(
+                "id", component_id + "_label"
+            ).html(display_name);
+        }
+    }
 </script>
