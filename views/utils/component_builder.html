@@ -53,6 +53,7 @@
         component_id=null,
         has_header=false,
         has_footer=false,
+        title=null,
     ){
         $("#" + parent).append('{{include "components/card.min.html"}}');
 
@@ -64,7 +65,11 @@
 
         if (has_header){
             card.append('{{include "components/card_header.min.html"}}');
-            $("#base_card_header").attr("id", component_id + "_header");
+            $("#base_card_header").attr(
+                "id", component_id + "_header"
+            ).append(
+                title
+            );
         }
 
         card.append('{{include "components/card_body.min.html"}}');
