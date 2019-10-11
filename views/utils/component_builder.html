@@ -47,4 +47,32 @@
             ).html(display_name);
         }
     }
+
+    function build_card(
+        parent,
+        component_id=null,
+        has_header=false,
+        has_footer=false,
+    ){
+        $("#" + parent).append('{{include "components/card.min.html"}}');
+
+        let card = $("#base_card");
+
+        if (component_id){
+            card.attr("id", component_id);
+        }
+
+        if (has_header){
+            card.append('{{include "components/card_header.min.html"}}');
+            $("#base_card_header").attr("id", component_id + "_header");
+        }
+
+        card.append('{{include "components/card_body.min.html"}}');
+        $("#base_card_body").attr("id", component_id + "_body");
+
+        if (has_footer){
+            card.append('{{include "components/card_footer.min.html"}}');
+            $("#base_card_footer").attr("id", component_id + "_footer");
+        }
+    }
 </script>
