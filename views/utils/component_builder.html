@@ -66,18 +66,35 @@
         if (has_header){
             card.append('{{include "components/card_header.min.html"}}');
             $("#base_card_header").attr(
-                "id", component_id + "_header"
+                "id", component_id + "_card_header"
             ).append(
                 title
             );
         }
 
         card.append('{{include "components/card_body.min.html"}}');
-        $("#base_card_body").attr("id", component_id + "_body");
+        $("#base_card_body").attr("id", component_id + "_card_body");
 
         if (has_footer){
             card.append('{{include "components/card_footer.min.html"}}');
-            $("#base_card_footer").attr("id", component_id + "_footer");
+            $("#base_card_footer").attr("id", component_id + "_card_footer");
+        }
+    }
+
+    function build_table(parent, component_id=null, headers=[]){
+        $("#" + parent).append('{{include "components/table.min.html"}}');
+
+        let table_header = $("#base_table_header");
+        if (component_id){
+            $("#base_table").attr("id", component_id);
+            table_header.attr("id", component_id + "_table_header");
+            $("#base_table_body").attr("id", component_id + "_table_body");
+        }
+
+        for (let i=0; i<headers.length; i++){
+            table_header.append(
+                $("<th></th>").html(headers[i])
+            );
         }
     }
 </script>
