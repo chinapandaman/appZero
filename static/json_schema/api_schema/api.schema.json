@@ -1,8 +1,9 @@
 {
     "type": "object",
-    "required": ["api_name", "supported_methods"],
+    "required": ["api_name", "table_name", "supported_methods"],
     "properties": {
         "api_name": {"type": "string"},
+        "table_name": {"type": "string"},
         "supported_methods": {
             "type": "array",
             "items": {"type": "string", "enum": ["GET", "POST", "PUT", "DELETE"]}

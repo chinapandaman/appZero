@@ -1,8 +1,8 @@
 {
     "api_name": "users",
+    "table_name": "auth_user",
     "supported_methods": ["GET"],
     "GET": {
-        "table_name": "auth_user",
         "queryable_fields": ["first_name"],
         "selectors": ["id", "first_name", "last_name"]
     }

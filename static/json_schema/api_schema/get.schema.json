@@ -1,8 +1,7 @@
 {
     "type": "object",
-    "required": ["table_name"],
+    "required": [],
     "properties": {
-        "table_name": {"type": "string"},
         "queryable_fields": {"type": "array", "items": {"type": "string"}},
         "selectors": {"type": "array", "items": {"type": "string"}}
     }

@@ -35,21 +35,21 @@ class API(AppZero):
         if "GET" not in self.data["supported_methods"]:
             raise HTTP(404)
 
-        query = self._db[self.data["GET"]["table_name"]].id > 0
+        query = self._db[self.data["table_name"]].id > 0
 
         if table_id:
-            query &= self._db[self.data["GET"]["table_name"]].id == table_id
+            query &= self._db[self.data["table_name"]].id == table_id
 
         if self.data["GET"].get("queryable_fields") and additional_query:
             for k, v in additional_query.items():
                 if k in self.data["GET"]["queryable_fields"]:
-                    query &= self._db[self.data["GET"]["table_name"]][k] == v
+                    query &= self._db[self.data["table_name"]][k] == v
                 else:
                     raise HTTP(400, "{field} is not a searchable field".format(field=k))
 
         result = self._db(query).select(
             *[
-                self._db[self.data["GET"]["table_name"]][each]
+                self._db[self.data["table_name"]][each]
                 for each in self.data["GET"].get("selectors", [])
             ]
         )
