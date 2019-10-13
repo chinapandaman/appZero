@@ -162,7 +162,7 @@ if configuration.get("scheduler.enabled"):
 # >>> for row in rows: print row.id, row.myfield
 # -------------------------------------------------------------------------
 
-for table in AppZeroFactory(layer="model", component="dal").build().data:
+for table in AppZeroFactory(layer="model", component="dal", db=db).build().data:
     db.define_table(
         table["table_name"],
         *[
