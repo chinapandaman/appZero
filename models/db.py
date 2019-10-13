@@ -174,7 +174,8 @@ for table in AppZeroFactory(layer="model", component="dal", db=db).build().data:
                 unique=field.get("field_is_unique", False),
             )
             for field in table["table_fields"]
-        ]
+        ],
+        auth.signature,
     )
 
 # -------------------------------------------------------------------------
