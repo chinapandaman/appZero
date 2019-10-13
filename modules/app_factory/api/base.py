@@ -19,6 +19,8 @@ class API(AppZero):
             "api",
             "{name}.json".format(name=param),
         )
+        if not os.path.exists(self._definition_path):
+            raise HTTP(404)
         self._schema_name = "api.schema.json"
         self._schema_path = os.path.join(
             current.request.folder, "static", "json_schema", "api_schema"
