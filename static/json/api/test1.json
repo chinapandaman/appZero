@@ -1,0 +1,7 @@
+{
+    "api_name": "test1",
+    "table_name": "test1",
+    "supported_methods": ["GET", "DELETE"],
+    "GET": {"queryable_fields": [], "selectors": ["id", "field1", "field2"]},
+    "DELETE": {"is_hard_removal": true}
+}

@@ -37,7 +37,11 @@ class API(AppZero):
         if "GET" not in self.data["supported_methods"]:
             raise HTTP(404)
 
-        query = self._db[self.data["table_name"]].id > 0
+        query = (
+            self._db[self.data["table_name"]].is_active == True
+            if "is_active" in self._db[self.data["table_name"]].fields
+            else self._db[self.data["table_name"]].id > 0
+        )
 
         if table_id:
             query &= self._db[self.data["table_name"]].id == table_id
@@ -56,4 +60,24 @@ class API(AppZero):
             ]
         )
 
-        return result.first() if table_id else result
+        if table_id:
+            if result:
+                return result.first()
+            raise HTTP(404)
+
+        return result
+
+    def delete(self, table_id):
+        if "DELETE" not in self.data["supported_methods"]:
+            raise HTTP(404)
+
+        record = self._db(
+            (self._db[self.data["table_name"]].is_active == True)
+            & (self._db[self.data["table_name"]].id == table_id)
+        )
+
+        record.delete() if self.data["DELETE"]["is_hard_removal"] else record.update(
+            is_active=False
+        )
+
+        return table_id

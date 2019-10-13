@@ -16,4 +16,17 @@ def template():
             )
         )
 
+    def DELETE(*args, **params):
+        if not params.get("api_name"):
+            raise HTTP(404)
+
+        if not len(args):
+            raise HTTP(400)
+
+        return response.json(
+            AppZeroFactory(layer="api", component=params.pop("api_name"), db=db)
+            .build()
+            .delete(table_id=args[0])
+        )
+
     return locals()

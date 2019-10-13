@@ -1,0 +1,5 @@
+{
+    "type": "object",
+    "required": ["is_hard_removal"],
+    "properties": {"is_hard_removal": {"type": "boolean"}}
+}
