@@ -176,4 +176,4 @@ if not configuration.get("app.production"):
         ),
     ]
 
-response.side_bar = AppZeroFactory("view", "menu", db).build().data
+response.side_bar = AppZeroFactory(layer="view", component="menu", db=db).build().data
