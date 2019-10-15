@@ -1,7 +1,8 @@
 {
     "api_name": "test1",
     "table_name": "test1",
-    "supported_methods": ["GET", "DELETE"],
+    "supported_methods": ["GET", "POST", "DELETE"],
     "GET": {"queryable_fields": [], "selectors": ["id", "field1", "field2"]},
+    "POST": {"allowed_fields": ["field1", "field2"], "allow_duplicates": false},
     "DELETE": {"is_hard_removal": true}
 }

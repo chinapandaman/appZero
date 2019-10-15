@@ -16,6 +16,16 @@ def template():
             )
         )
 
+    def POST(*args, **params):
+        if not params.get("api_name"):
+            raise HTTP(404)
+
+        return response.json(
+            AppZeroFactory(layer="api", component=params.pop("api_name"), db=db)
+            .build()
+            .post(data=params)
+        )
+
     def DELETE(*args, **params):
         if not params.get("api_name"):
             raise HTTP(404)

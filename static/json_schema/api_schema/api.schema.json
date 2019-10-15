@@ -9,6 +9,7 @@
             "items": {"type": "string", "enum": ["GET", "POST", "PUT", "DELETE"]}
         },
         "GET": {"$ref": "get.schema.json"},
+        "POST": {"$ref": "post.schema.json"},
         "DELETE": {"$ref": "delete.schema.json"}
     }
 }

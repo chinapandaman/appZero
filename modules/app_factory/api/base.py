@@ -67,6 +67,22 @@ class API(AppZero):
 
         return result
 
+    def post(self, data):
+        if "POST" not in self.data["supported_methods"]:
+            raise HTTP(404)
+
+        if any(
+            [each not in self.data["POST"]["allowed_fields"] for each in data.keys()]
+        ):
+            raise HTTP(400)
+
+        if not self.data["POST"]["allow_duplicates"] and self._db[
+            self.data["table_name"]
+        ](**data):
+            raise HTTP(400)
+
+        return self._db[self.data["table_name"]].insert(**data)
+
     def delete(self, table_id):
         if "DELETE" not in self.data["supported_methods"]:
             raise HTTP(404)
