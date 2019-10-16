@@ -37,14 +37,14 @@
         }
     }
 
-    function build_input(parent, display_name, component_id=null){
+    function build_input(parent, component_id=null){
         $("#" + parent).append('{{include "components/input_text.min.html"}}');
 
         if (component_id){
             $("#base_input").attr("id", component_id);
             $("#base_input_label").attr(
                 "id", component_id + "_label"
-            ).html(display_name);
+            );
         }
     }
 
@@ -53,7 +53,6 @@
         component_id=null,
         has_header=false,
         has_footer=false,
-        title=null,
     ){
         $("#" + parent).append('{{include "components/card.min.html"}}');
 
@@ -67,8 +66,6 @@
             card.append('{{include "components/card_header.min.html"}}');
             $("#base_card_header").attr(
                 "id", component_id + "_card_header"
-            ).append(
-                title
             );
         }
 
@@ -81,7 +78,7 @@
         }
     }
 
-    function build_table(parent, component_id=null, headers=[]){
+    function build_table(parent, component_id=null){
         $("#" + parent).append('{{include "components/table.min.html"}}');
 
         let table_header = $("#base_table_header");
@@ -89,12 +86,6 @@
             $("#base_table").attr("id", component_id);
             table_header.attr("id", component_id + "_table_header");
             $("#base_table_body").attr("id", component_id + "_table_body");
-        }
-
-        for (let i=0; i<headers.length; i++){
-            table_header.append(
-                $("<th></th>").html(headers[i])
-            );
         }
     }
 </script>
