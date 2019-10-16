@@ -3,6 +3,10 @@
         $("#page_content").append('{{include "components/main_view_port.min.html"}}');
     }
 
+    function build_text(parent, text){
+        $("#" + parent).html(text);
+    }
+
     function build_grid_row(parent, component_id=null){
         $("#" + parent).append('{{include "components/grid_row.min.html"}}');
 
@@ -86,6 +90,14 @@
             $("#base_table").attr("id", component_id);
             table_header.attr("id", component_id + "_table_header");
             $("#base_table_body").attr("id", component_id + "_table_body");
+        }
+    }
+
+    function build_table_header(table_id, headers){
+        for (let i=0; i<headers.length; i++){
+            $("#" + table_id + "_table_header").append(
+                $("<th></th>").html(headers[i])
+            );
         }
     }
 </script>
