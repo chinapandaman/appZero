@@ -52,6 +52,10 @@
         }
     }
 
+    function build_input_display_name(input_id, label){
+        $("#" + input_id + "_label").html(label);
+    }
+
     function build_card(
         parent,
         component_id=null,
