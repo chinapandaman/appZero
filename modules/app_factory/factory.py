@@ -14,15 +14,24 @@ class AppZeroFactory(object):
             return Menu(self._db)
 
         if self._layer == "model":
-            return self.build_model()
+            return self._build_model()
 
         if self._layer == "api":
             from app_factory.api.base import API
 
             return API(self._db, param=self._component)
 
-    def build_model(self):
+        if self._layer == "view":
+            return self._build_view()
+
+    def _build_model(self):
         if self._component == "dal":
             from app_factory.model.dal.table import Table
 
             return Table(self._db)
+
+    def _build_view(self):
+        if self._component.split("/")[0] == "section":
+            from app_factory.view.section.section import Section
+
+            return Section(db=self._db, param=self._component.split("/")[1])

@@ -1,0 +1,6 @@
+{
+    "section_name": "test1",
+    "section_title": "Test 1",
+    "allowed_operation": ["create", "read", "update", "delete"],
+    "api_name": "test1"
+}
