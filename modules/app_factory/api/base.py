@@ -73,7 +73,7 @@ class API(AppZero):
     def post(self, data):
         self._method_validate("POST")
 
-        if any(
+        if self.data["POST"]["allowed_fields"] and any(
             [each not in self.data["POST"]["allowed_fields"] for each in data.keys()]
         ):
             raise HTTP(400)
@@ -88,7 +88,7 @@ class API(AppZero):
     def put(self, table_id, data):
         self._method_validate("PUT")
 
-        if any(
+        if self.data["PUT"]["allowed_fields"] and any(
             [each not in self.data["PUT"]["allowed_fields"] for each in data.keys()]
         ):
             raise HTTP(400)
