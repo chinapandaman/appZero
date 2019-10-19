@@ -1,0 +1,7 @@
+{
+    "type": "object",
+    "required": ["allowed_fields"],
+    "properties": {
+        "allowed_fields": {"type": "array", "items": {"type": "string"}}
+    }
+}
