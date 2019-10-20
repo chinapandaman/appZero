@@ -15,14 +15,14 @@
         build_table_header("test_table", ["Header 1", "Header 2"]);
         {{for i in range(100):}}
         $("#test_table_table_body").append(
-        	$("<tr></tr>").append(
-        		$("<td></td>").html("Test")
-        	).append(
-        		$("<td></td>").html("Test")
-        	)
-    	);
-    	{{pass}}
-    	$("#test_table").DataTable();
+            $("<tr></tr>").append(
+                $("<td></td>").html("Test")
+            ).append(
+                $("<td></td>").html("Test")
+            )
+        );
+        {{pass}}
+        $("#test_table").DataTable();
     });
 </script>
 {{end page_js}}
