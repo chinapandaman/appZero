@@ -1,39 +1,39 @@
 <script type="text/javascript">
-	function section_master_handler(parent, section_name){
-		$.ajax({
-			url: "{{=URL('api', 'sections')}}" + "/" + section_name,
-			method: "GET",
-			success: function(section_definition){
-				build_card(parent, section_definition["section_name"], true, false);
-				build_title(section_definition["section_name"] + "_card_header", section_definition["section_title"]);
-				build_table(section_definition["section_name"] + "_card_body", section_definition["section_name"] + "_table");
+    function section_master_handler(parent, section_name){
+        $.ajax({
+            url: "{{=URL('api', 'sections')}}" + "/" + section_name,
+            method: "GET",
+            success: function(section_definition){
+                build_card(parent, section_definition["section_name"], true, false);
+                build_title(section_definition["section_name"] + "_card_header", section_definition["section_title"]);
+                build_table(section_definition["section_name"] + "_card_body", section_definition["section_name"] + "_table");
 
-				let header = [];
-				for (let i=0; i<section_definition["summary_fields"].length; i++){
-					header.push(section_definition["summary_fields"][i]);
-				}
+                let header = [];
+                for (let i=0; i<section_definition["summary_fields"].length; i++){
+                    header.push(section_definition["summary_fields"][i]);
+                }
 
-				build_table_header(section_definition["section_name"] + "_table", header);
+                build_table_header(section_definition["section_name"] + "_table", header);
 
-				$.ajax({
-					url: "{{=URL('api', 'template')}}",
-					method: "GET",
-					data: {api_name: section_definition["api_name"]},
-					success: function(section_data){
-						for (let i=0; i<section_data.length; i++){
-							let tr = $("<tr></tr>");
-							for (let j=0; j<header.length; j++){
-								tr.append(
-									$("<td></td>").html(section_data[i][header[j]])
-								);
-							}
-							$("#" + section_definition["section_name"] + "_table_table_body").append(tr);
-						}
+                $.ajax({
+                    url: "{{=URL('api', 'template')}}",
+                    method: "GET",
+                    data: {api_name: section_definition["api_name"]},
+                    success: function(section_data){
+                        for (let i=0; i<section_data.length; i++){
+                            let tr = $("<tr></tr>");
+                            for (let j=0; j<header.length; j++){
+                                tr.append(
+                                    $("<td></td>").html(section_data[i][header[j]])
+                                );
+                            }
+                            $("#" + section_definition["section_name"] + "_table_table_body").append(tr);
+                        }
 
-						$("#" + section_definition["section_name"] + "_table").DataTable();
-					}
-				});
-			}
-		});
-	}
+                        $("#" + section_definition["section_name"] + "_table").DataTable();
+                    }
+                });
+            }
+        });
+    }
 </script>
