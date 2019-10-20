@@ -1,6 +1,7 @@
 {
     "section_name": "test1",
     "section_title": "Test 1",
+    "summary_fields": ["id", "field1", "field2", "field3"],
     "allowed_operation": ["create", "read", "update", "delete"],
     "api_name": "test1"
 }

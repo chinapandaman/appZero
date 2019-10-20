@@ -3,8 +3,8 @@
         $("#page_content").append('{{include "components/main_view_port.min.html"}}');
     }
 
-    function build_text(parent, text){
-        $("#" + parent).html(text);
+    function build_title(parent, text){
+        $("#" + parent).append($("<h6></h6>").html(text));
     }
 
     function build_grid_row(parent, component_id=null){

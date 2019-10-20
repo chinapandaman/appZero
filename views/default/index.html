@@ -2,27 +2,13 @@
 
 {{block page_js}}
 {{include "utils/component_builder.html"}}
+{{include "utils/section_handler.html"}}
 <script type="text/javascript">
     $(document).ready(function(){
         build_main_view_port();
         build_grid_row("main_view_port", "test_row");
         build_grid_col("test_row", "test_col_1", 12);
-        build_card("test_col_1", "test_card", true, true);
-        build_text("test_card_card_header", "Test");
-        build_grid_row("test_card_card_body", "test_row_2");
-        build_grid_col("test_row_2", "test_col_2", 12);
-        build_table("test_col_2", "test_table");
-        build_table_header("test_table", ["Header 1", "Header 2"]);
-        {{for i in range(100):}}
-        $("#test_table_table_body").append(
-            $("<tr></tr>").append(
-                $("<td></td>").html("Test")
-            ).append(
-                $("<td></td>").html("Test")
-            )
-        );
-        {{pass}}
-        $("#test_table").DataTable();
+        section_master_handler("test_col_1", "test1");
     });
 </script>
 {{end page_js}}
