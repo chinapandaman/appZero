@@ -104,4 +104,20 @@
             );
         }
     }
+
+    function build_button(
+        parent,
+        component_id=null,
+        type="primary",
+        display_name=null
+    ){
+        $("#" + parent).append('{{include "components/button.min.html"}}');
+
+        let button = $("#base_button");
+        if (component_id){
+            button.attr("id", component_id);
+        }
+
+        button.addClass("btn-" + type).html(display_name);
+    }
 </script>

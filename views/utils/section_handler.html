@@ -4,8 +4,21 @@
             url: "{{=URL('api', 'sections')}}" + "/" + section_name,
             method: "GET",
             success: function(section_definition){
-                build_card(parent, section_definition["section_name"], true, false);
+                build_card(
+                    parent,
+                    section_definition["section_name"],
+                    true,
+                    section_definition["allowed_operation"].includes("create")
+                );
                 build_title(section_definition["section_name"] + "_card_header", section_definition["section_title"]);
+                if (section_definition["allowed_operation"].includes("create")){
+                    build_button(
+                        section_definition["section_name"] + "_card_footer",
+                        section_definition["section_name"] + "_create",
+                        "info",
+                        "Create",
+                    );
+                }
 
                 let header = [];
                 for (let i=0; i<section_definition["summary_fields"].length; i++){
