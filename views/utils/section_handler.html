@@ -11,31 +11,34 @@
                     section_definition["allowed_operation"].includes("create")
                 );
                 build_title(section_definition["section_name"] + "_card_header", section_definition["section_title"]);
-                if (section_definition["allowed_operation"].includes("create")){
-                    build_button(
-                        section_definition["section_name"] + "_card_footer",
-                        section_definition["section_name"] + "_create",
-                        "primary",
-                        "Create",
-                    );
 
-                    build_modal("main_view_port", section_definition["section_name"]);
+                build_modal("main_view_port", section_definition["section_name"]);
+
+                $("#" + section_definition["section_name"] + "_modal_title").html(
+                    section_definition["section_title"]
+                );
+                build_button(
+                    section_definition["section_name"] + "_modal_footer",
+                    section_definition["section_name"] + "_modal_close",
+                    "danger",
+                    "Close"
+                );
+                $("#" + section_definition["section_name"] + "_modal_close").attr(
+                    "data-dismiss", "modal"
+                );
+
+                build_button(
+                    section_definition["section_name"] + "_card_footer",
+                    section_definition["section_name"] + "_create",
+                    "primary",
+                    "Create",
+                );
+
+                if (section_definition["allowed_operation"].includes("create")){
                     $("#" + section_definition["section_name"] + "_create").attr(
                         "data-toggle", "modal"
                     ).attr(
                         "data-target", "#" + section_definition["section_name"] + "_modal"
-                    );
-                    $("#" + section_definition["section_name"] + "_modal_title").html(
-                        section_definition["section_title"]
-                    );
-                    build_button(
-                        section_definition["section_name"] + "_modal_footer",
-                        section_definition["section_name"] + "_modal_close",
-                        "danger",
-                        "Close"
-                    );
-                    $("#" + section_definition["section_name"] + "_modal_close").attr(
-                        "data-dismiss", "modal"
                     );
                 }
 
@@ -61,6 +64,14 @@
                                     $("<td></td>").html(section_data[i][header[j]])
                                 );
                             }
+                            if (section_definition["allowed_operation"].includes("read")){
+                                tr.attr(
+                                    "data-toggle", "modal"
+                                ).attr(
+                                    "data-target", "#" + section_definition["section_name"] + "_modal"
+                                )
+                            }
+
                             $("#" + section_definition["section_name"] + "_table_table_body").append(tr);
                         }
 
