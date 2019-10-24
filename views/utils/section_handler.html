@@ -13,18 +13,10 @@
                 build_title(section_definition["section_name"] + "_card_header", section_definition["section_title"]);
 
                 build_modal("main_view_port", section_definition["section_name"]);
+                let modal_footer = $("#" + section_definition["section_name"] + "_modal_footer");
 
                 $("#" + section_definition["section_name"] + "_modal_title").html(
                     section_definition["section_title"]
-                );
-                build_button(
-                    section_definition["section_name"] + "_modal_footer",
-                    section_definition["section_name"] + "_modal_close",
-                    "danger",
-                    "Close"
-                );
-                $("#" + section_definition["section_name"] + "_modal_close").attr(
-                    "data-dismiss", "modal"
                 );
 
                 build_button(
@@ -40,6 +32,20 @@
                     ).attr(
                         "data-target", "#" + section_definition["section_name"] + "_modal"
                     );
+
+                    $("#" + section_definition["section_name"] + "_create").bind("click", function(){
+                        if (
+                            section_definition["allowed_operation"].includes("create")
+                        ){
+                            modal_footer.empty();
+                            build_button(
+                                section_definition["section_name"] + "_modal_footer",
+                                section_definition["section_name"] + "_modal_create",
+                                "primary",
+                                "Create"
+                            );
+                        }
+                    });
                 }
 
                 let header = [];
@@ -69,7 +75,30 @@
                                     "data-toggle", "modal"
                                 ).attr(
                                     "data-target", "#" + section_definition["section_name"] + "_modal"
-                                )
+                                ).bind("click", function(){
+                                    if (
+                                        section_definition["allowed_operation"].includes("update") ||
+                                        section_definition["allowed_operation"].includes("delete")
+                                    ){
+                                        modal_footer.empty();
+                                        if (section_definition["allowed_operation"].includes("update")){
+                                            build_button(
+                                                section_definition["section_name"] + "_modal_footer",
+                                                section_definition["section_name"] + "_modal_edit",
+                                                "primary",
+                                                "Edit"
+                                            );
+                                        }
+                                        if (section_definition["allowed_operation"].includes("delete")){
+                                            build_button(
+                                                section_definition["section_name"] + "_modal_footer",
+                                                section_definition["section_name"] + "_modal_delete",
+                                                "danger",
+                                                "Delete"
+                                            );
+                                        }
+                                    }
+                                });
                             }
 
                             $("#" + section_definition["section_name"] + "_table_table_body").append(tr);
