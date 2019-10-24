@@ -120,4 +120,15 @@
 
         button.addClass("btn-" + type).html(display_name);
     }
+
+    function build_modal(parent, component_id=null){
+        $("#" + parent).append('{{include "components/modal.min.html"}}');
+
+        if (component_id){
+            $("#base_modal").attr("id", component_id + "_modal");
+            $("#base_modal_title").attr("id", component_id + "_modal_title");
+            $("#base_modal_body").attr("id", component_id + "_modal_body");
+            $("#base_modal_footer").attr("id", component_id + "_modal_footer");
+        }
+    }
 </script>
