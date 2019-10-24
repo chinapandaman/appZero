@@ -19,14 +19,14 @@
                     section_definition["section_title"]
                 );
 
-                build_button(
-                    section_definition["section_name"] + "_card_footer",
-                    section_definition["section_name"] + "_create",
-                    "primary",
-                    "Create",
-                );
-
                 if (section_definition["allowed_operation"].includes("create")){
+                    build_button(
+                        section_definition["section_name"] + "_card_footer",
+                        section_definition["section_name"] + "_create",
+                        "primary",
+                        "Create",
+                    );
+                    
                     $("#" + section_definition["section_name"] + "_create").attr(
                         "data-toggle", "modal"
                     ).attr(
