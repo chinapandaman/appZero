@@ -126,8 +126,16 @@
 
         if (component_id){
             $("#base_modal").attr("id", component_id + "_modal");
+            $("#base_modal_content").attr("id", component_id + "_modal_content");
             $("#base_modal_title").attr("id", component_id + "_modal_title");
             $("#base_modal_body").attr("id", component_id + "_modal_body");
+        }
+    }
+
+    function build_modal_footer(parent, component_id=null){
+        $("#" + parent).append('{{include "components/modal_footer.min.html"}}');
+
+        if (component_id){
             $("#base_modal_footer").attr("id", component_id + "_modal_footer");
         }
     }

@@ -13,7 +13,6 @@
                 build_title(section_definition["section_name"] + "_card_header", section_definition["section_title"]);
 
                 build_modal("main_view_port", section_definition["section_name"]);
-                let modal_footer = $("#" + section_definition["section_name"] + "_modal_footer");
 
                 $("#" + section_definition["section_name"] + "_modal_title").html(
                     section_definition["section_title"]
@@ -26,7 +25,7 @@
                         "primary",
                         "Create",
                     );
-                    
+
                     $("#" + section_definition["section_name"] + "_create").attr(
                         "data-toggle", "modal"
                     ).attr(
@@ -34,10 +33,11 @@
                     );
 
                     $("#" + section_definition["section_name"] + "_create").bind("click", function(){
+                        $("#" + section_definition["section_name"] + "_modal_content").find(".modal-footer").remove();
                         if (
                             section_definition["allowed_operation"].includes("create")
                         ){
-                            modal_footer.empty();
+                            build_modal_footer(section_definition["section_name"] + "_modal_content", section_definition["section_name"]);
                             build_button(
                                 section_definition["section_name"] + "_modal_footer",
                                 section_definition["section_name"] + "_modal_create",
@@ -76,11 +76,12 @@
                                 ).attr(
                                     "data-target", "#" + section_definition["section_name"] + "_modal"
                                 ).bind("click", function(){
+                                    $("#" + section_definition["section_name"] + "_modal_content").find(".modal-footer").remove();
                                     if (
                                         section_definition["allowed_operation"].includes("update") ||
                                         section_definition["allowed_operation"].includes("delete")
                                     ){
-                                        modal_footer.empty();
+                                        build_modal_footer(section_definition["section_name"] + "_modal_content", section_definition["section_name"]);
                                         if (section_definition["allowed_operation"].includes("update")){
                                             build_button(
                                                 section_definition["section_name"] + "_modal_footer",
