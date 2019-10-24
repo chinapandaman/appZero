@@ -18,6 +18,8 @@
                     section_definition["section_title"]
                 );
 
+                let modal_toggle = $("#" + section_definition["section_name"] + "_modal_toggle")
+
                 if (section_definition["allowed_operation"].includes("create")){
                     build_button(
                         section_definition["section_name"] + "_card_footer",
@@ -26,13 +28,8 @@
                         "Create",
                     );
 
-                    $("#" + section_definition["section_name"] + "_create").attr(
-                        "data-toggle", "modal"
-                    ).attr(
-                        "data-target", "#" + section_definition["section_name"] + "_modal"
-                    );
-
                     $("#" + section_definition["section_name"] + "_create").bind("click", function(){
+                        modal_toggle.click();
                         $("#" + section_definition["section_name"] + "_modal_content").find(".modal-footer").remove();
                         if (
                             section_definition["allowed_operation"].includes("create")
@@ -71,11 +68,8 @@
                                 );
                             }
                             if (section_definition["allowed_operation"].includes("read")){
-                                tr.attr(
-                                    "data-toggle", "modal"
-                                ).attr(
-                                    "data-target", "#" + section_definition["section_name"] + "_modal"
-                                ).bind("click", function(){
+                                tr.bind("click", function(){
+                                    modal_toggle.click();
                                     $("#" + section_definition["section_name"] + "_modal_content").find(".modal-footer").remove();
                                     if (
                                         section_definition["allowed_operation"].includes("update") ||
