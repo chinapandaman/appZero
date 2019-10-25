@@ -1,8 +1,6 @@
 <script type="text/javascript">
     function build_main_view_port() {
-        $("#page_content").append(
-            '{{include "components/main_view_port.min.html"}}'
-        );
+        $("#page_content").append('{{include "components/main_view_port.min.html"}}');
     }
 
     function build_title(parent, text) {
@@ -52,12 +50,7 @@
         $("#" + input_id + "_label").html(label);
     }
 
-    function build_card(
-        parent,
-        component_id = null,
-        has_header = false,
-        has_footer = false
-    ) {
+    function build_card(parent, component_id = null, has_header = false, has_footer = false) {
         $("#" + parent).append('{{include "components/card.min.html"}}');
 
         let card = $("#base_card");
@@ -93,18 +86,11 @@
 
     function build_table_header(table_id, headers) {
         for (let i = 0; i < headers.length; i++) {
-            $("#" + table_id + "_table_header").append(
-                $("<th></th>").html(headers[i])
-            );
+            $("#" + table_id + "_table_header").append($("<th></th>").html(headers[i]));
         }
     }
 
-    function build_button(
-        parent,
-        component_id = null,
-        type = "primary",
-        display_name = null
-    ) {
+    function build_button(parent, component_id = null, type = "primary", display_name = null) {
         $("#" + parent).append('{{include "components/button.min.html"}}');
 
         let button = $("#base_button");

@@ -10,23 +10,14 @@
                     true,
                     section_definition["allowed_operation"].includes("create")
                 );
-                build_title(
-                    section_definition["section_name"] + "_card_header",
-                    section_definition["section_title"]
-                );
+                build_title(section_definition["section_name"] + "_card_header", section_definition["section_title"]);
 
                 build_modal("main_view_port", section_definition["section_name"]);
 
-                $("#" + section_definition["section_name"] + "_modal_title").html(
-                    section_definition["section_title"]
-                );
+                $("#" + section_definition["section_name"] + "_modal_title").html(section_definition["section_title"]);
 
-                let modal_toggle = $(
-                    "#" + section_definition["section_name"] + "_modal_toggle"
-                );
-                let modal_dismiss = $(
-                    "#" + section_definition["section_name"] + "_modal_dismiss"
-                );
+                let modal_toggle = $("#" + section_definition["section_name"] + "_modal_toggle");
+                let modal_dismiss = $("#" + section_definition["section_name"] + "_modal_dismiss");
 
                 if (section_definition["allowed_operation"].includes("create")) {
                     build_button(
@@ -36,46 +27,28 @@
                         "Create"
                     );
 
-                    $("#" + section_definition["section_name"] + "_create").bind(
-                        "click",
-                        function() {
-                            modal_toggle.click();
-                            $(
-                                "#" +
-                                    section_definition["section_name"] +
-                                    "_modal_content"
-                            )
-                                .find(".modal-footer")
-                                .remove();
-                            if (
-                                section_definition["allowed_operation"].includes(
-                                    "create"
-                                )
-                            ) {
-                                build_modal_footer(
-                                    section_definition["section_name"] +
-                                        "_modal_content",
-                                    section_definition["section_name"]
-                                );
-                                build_button(
-                                    section_definition["section_name"] +
-                                        "_modal_footer",
-                                    section_definition["section_name"] +
-                                        "_modal_create",
-                                    "primary",
-                                    "Create"
-                                );
-                            }
+                    $("#" + section_definition["section_name"] + "_create").bind("click", function() {
+                        modal_toggle.click();
+                        $("#" + section_definition["section_name"] + "_modal_content")
+                            .find(".modal-footer")
+                            .remove();
+                        if (section_definition["allowed_operation"].includes("create")) {
+                            build_modal_footer(
+                                section_definition["section_name"] + "_modal_content",
+                                section_definition["section_name"]
+                            );
+                            build_button(
+                                section_definition["section_name"] + "_modal_footer",
+                                section_definition["section_name"] + "_modal_create",
+                                "primary",
+                                "Create"
+                            );
                         }
-                    );
+                    });
                 }
 
                 let header = [];
-                for (
-                    let i = 0;
-                    i < section_definition["summary_fields"].length;
-                    i++
-                ) {
+                for (let i = 0; i < section_definition["summary_fields"].length; i++) {
                     if (section_definition["summary_fields"][i] != "id") {
                         header.push(section_definition["summary_fields"][i]);
                     }
@@ -92,86 +65,49 @@
                             section_definition["section_name"] + "_card_body",
                             section_definition["section_name"] + "_table"
                         );
-                        build_table_header(
-                            section_definition["section_name"] + "_table",
-                            header
-                        );
+                        build_table_header(section_definition["section_name"] + "_table", header);
 
-                        let table_body = $(
-                            "#" +
-                                section_definition["section_name"] +
-                                "_table_table_body"
-                        );
+                        let table_body = $("#" + section_definition["section_name"] + "_table_table_body");
 
                         for (let i = 0; i < section_data.length; i++) {
                             let tr = $("<tr></tr>");
                             let id = section_data[i]["id"];
                             for (let j = 0; j < header.length; j++) {
-                                tr.append(
-                                    $("<td></td>").html(section_data[i][header[j]])
-                                ).attr("name", section_data[i]["id"]);
+                                tr.append($("<td></td>").html(section_data[i][header[j]])).attr(
+                                    "name",
+                                    section_data[i]["id"]
+                                );
                             }
-                            if (
-                                section_definition["allowed_operation"].includes(
-                                    "read"
-                                )
-                            ) {
+                            if (section_definition["allowed_operation"].includes("read")) {
                                 tr.bind("click", function() {
                                     modal_toggle.click();
-                                    $(
-                                        "#" +
-                                            section_definition["section_name"] +
-                                            "_modal_content"
-                                    )
+                                    $("#" + section_definition["section_name"] + "_modal_content")
                                         .find(".modal-footer")
                                         .remove();
                                     if (
-                                        section_definition[
-                                            "allowed_operation"
-                                        ].includes("update") ||
-                                        section_definition[
-                                            "allowed_operation"
-                                        ].includes("delete")
+                                        section_definition["allowed_operation"].includes("update") ||
+                                        section_definition["allowed_operation"].includes("delete")
                                     ) {
                                         build_modal_footer(
-                                            section_definition["section_name"] +
-                                                "_modal_content",
+                                            section_definition["section_name"] + "_modal_content",
                                             section_definition["section_name"]
                                         );
-                                        if (
-                                            section_definition[
-                                                "allowed_operation"
-                                            ].includes("update")
-                                        ) {
+                                        if (section_definition["allowed_operation"].includes("update")) {
                                             build_button(
-                                                section_definition["section_name"] +
-                                                    "_modal_footer",
-                                                section_definition["section_name"] +
-                                                    "_modal_edit",
+                                                section_definition["section_name"] + "_modal_footer",
+                                                section_definition["section_name"] + "_modal_edit",
                                                 "primary",
                                                 "Edit"
                                             );
                                         }
-                                        if (
-                                            section_definition[
-                                                "allowed_operation"
-                                            ].includes("delete")
-                                        ) {
+                                        if (section_definition["allowed_operation"].includes("delete")) {
                                             build_button(
-                                                section_definition["section_name"] +
-                                                    "_modal_footer",
-                                                section_definition["section_name"] +
-                                                    "_modal_delete",
+                                                section_definition["section_name"] + "_modal_footer",
+                                                section_definition["section_name"] + "_modal_delete",
                                                 "danger",
                                                 "Delete"
                                             );
-                                            $(
-                                                "#" +
-                                                    section_definition[
-                                                        "section_name"
-                                                    ] +
-                                                    "_modal_delete"
-                                            ).click(function() {
+                                            $("#" + section_definition["section_name"] + "_modal_delete").click(function() {
                                                 Swal.fire({
                                                     title: "Are you sure?",
                                                     text: "Please confirm.",
@@ -181,39 +117,24 @@
                                                     if (result.value) {
                                                         Swal.fire({
                                                             title: "Processing...",
-                                                            text:
-                                                                "Please wait a moment.",
+                                                            text: "Please wait a moment.",
                                                             allowOutsideClick: false,
                                                             showConfirmButton: false
                                                         });
                                                         $.ajax({
-                                                            url:
-                                                                "{{=URL('api', 'template')}}" +
-                                                                "/" +
-                                                                id,
+                                                            url: "{{=URL('api', 'template')}}" + "/" + id,
                                                             method: "DELETE",
                                                             data: {
-                                                                api_name:
-                                                                    section_definition[
-                                                                        "section_name"
-                                                                    ]
+                                                                api_name: section_definition["section_name"]
                                                             },
                                                             success: function() {
                                                                 Swal.fire({
-                                                                    title:
-                                                                        "Success",
-                                                                    text:
-                                                                        "Your request has been submitted.",
+                                                                    title: "Success",
+                                                                    text: "Your request has been submitted.",
                                                                     type: "success"
                                                                 });
                                                                 modal_dismiss.click();
-                                                                table_body
-                                                                    .find(
-                                                                        "tr[name=" +
-                                                                            id +
-                                                                            "]"
-                                                                    )
-                                                                    .remove();
+                                                                table_body.find("tr[name=" + id + "]").remove();
                                                             }
                                                         });
                                                     }
@@ -227,9 +148,7 @@
                             table_body.append(tr);
                         }
 
-                        $(
-                            "#" + section_definition["section_name"] + "_table"
-                        ).DataTable();
+                        $("#" + section_definition["section_name"] + "_table").DataTable();
                     }
                 });
             }
