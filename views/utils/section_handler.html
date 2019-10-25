@@ -48,7 +48,9 @@
 
                 let header = [];
                 for (let i=0; i<section_definition["summary_fields"].length; i++){
-                    header.push(section_definition["summary_fields"][i]);
+                    if (section_definition["summary_fields"][i] != "id"){
+                        header.push(section_definition["summary_fields"][i]);
+                    }
                 }
 
                 // TODO: spinning loading effect

@@ -2,7 +2,7 @@
     "api_name": "test1",
     "table_name": "test1",
     "supported_methods": ["GET", "POST", "PUT", "DELETE"],
-    "GET": {"queryable_fields": [], "selectors": ["id", "field1", "field2", "field3"]},
+    "GET": {"queryable_fields": [], "selectors": ["field1", "field2", "field3"]},
     "POST": {"allowed_fields": [], "allow_duplicates": false},
     "PUT": {"allowed_fields": []},
     "DELETE": {"is_hard_removal": false}

@@ -57,6 +57,7 @@ class API(AppZero):
                     raise HTTP(400, "{field} is not a searchable field".format(field=k))
 
         result = self._db(query).select(
+            self._db[self.data["table_name"]].id,
             *[
                 self._db[self.data["table_name"]][each]
                 for each in self.data["GET"].get("selectors", [])
