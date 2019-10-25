@@ -1,104 +1,98 @@
 <script type="text/javascript">
-    function build_main_view_port(){
-        $("#page_content").append('{{include "components/main_view_port.min.html"}}');
+    function build_main_view_port() {
+        $("#page_content").append(
+            '{{include "components/main_view_port.min.html"}}'
+        );
     }
 
-    function build_title(parent, text){
+    function build_title(parent, text) {
         $("#" + parent).append($("<h6></h6>").html(text));
     }
 
-    function build_grid_row(parent, component_id=null){
+    function build_grid_row(parent, component_id = null) {
         $("#" + parent).append('{{include "components/grid_row.min.html"}}');
 
-        if (component_id){
+        if (component_id) {
             $("#base_grid_row").attr("id", component_id);
         }
     }
 
-    function build_grid_col(parent, component_id=null, ratio=null){
+    function build_grid_col(parent, component_id = null, ratio = null) {
         $("#" + parent).append('{{include "components/grid_col.min.html"}}');
 
         let base_grid_col = $("#base_grid_col");
 
-        if (component_id){
+        if (component_id) {
             base_grid_col.attr("id", component_id);
         }
 
-        if (ratio){
-            base_grid_col.removeClass(
-                "col-5"
-            ).addClass(
-                "col-" + ratio.toString()
-            );
+        if (ratio) {
+            base_grid_col.removeClass("col-5").addClass("col-" + ratio.toString());
         }
     }
 
-    function build_form(parent, component_id=null){
+    function build_form(parent, component_id = null) {
         $("#" + parent).append('{{include "components/form.min.html"}}');
 
-        if (component_id){
+        if (component_id) {
             $("#base_form").attr("id", component_id);
         }
     }
 
-    function build_input(parent, component_id=null){
+    function build_input(parent, component_id = null) {
         $("#" + parent).append('{{include "components/input_text.min.html"}}');
 
-        if (component_id){
+        if (component_id) {
             $("#base_input").attr("id", component_id);
-            $("#base_input_label").attr(
-                "id", component_id + "_label"
-            );
+            $("#base_input_label").attr("id", component_id + "_label");
         }
     }
 
-    function build_input_display_name(input_id, label){
+    function build_input_display_name(input_id, label) {
         $("#" + input_id + "_label").html(label);
     }
 
     function build_card(
         parent,
-        component_id=null,
-        has_header=false,
-        has_footer=false,
-    ){
+        component_id = null,
+        has_header = false,
+        has_footer = false
+    ) {
         $("#" + parent).append('{{include "components/card.min.html"}}');
 
         let card = $("#base_card");
 
-        if (component_id){
+        if (component_id) {
             card.attr("id", component_id);
         }
 
-        if (has_header){
+        if (has_header) {
             card.append('{{include "components/card_header.min.html"}}');
-            $("#base_card_header").attr(
-                "id", component_id + "_card_header"
-            );
+            $("#base_card_header").attr("id", component_id + "_card_header");
         }
 
         card.append('{{include "components/card_body.min.html"}}');
         $("#base_card_body").attr("id", component_id + "_card_body");
 
-        if (has_footer){
+        if (has_footer) {
             card.append('{{include "components/card_footer.min.html"}}');
             $("#base_card_footer").attr("id", component_id + "_card_footer");
         }
     }
 
-    function build_table(parent, component_id=null){
+    function build_table(parent, component_id = null) {
         $("#" + parent).append('{{include "components/table.min.html"}}');
 
         let table_header = $("#base_table_header");
-        if (component_id){
+        if (component_id) {
             $("#base_table").attr("id", component_id);
             table_header.attr("id", component_id + "_table_header");
             $("#base_table_body").attr("id", component_id + "_table_body");
         }
     }
 
-    function build_table_header(table_id, headers){
-        for (let i=0; i<headers.length; i++){
+    function build_table_header(table_id, headers) {
+        for (let i = 0; i < headers.length; i++) {
             $("#" + table_id + "_table_header").append(
                 $("<th></th>").html(headers[i])
             );
@@ -107,49 +101,44 @@
 
     function build_button(
         parent,
-        component_id=null,
-        type="primary",
-        display_name=null
-    ){
+        component_id = null,
+        type = "primary",
+        display_name = null
+    ) {
         $("#" + parent).append('{{include "components/button.min.html"}}');
 
         let button = $("#base_button");
-        if (component_id){
+        if (component_id) {
             button.attr("id", component_id);
         }
 
         button.addClass("btn-" + type).html(display_name);
     }
 
-    function build_modal(parent, component_id=null){
+    function build_modal(parent, component_id = null) {
         $("#" + parent).append('{{include "components/modal.min.html"}}');
 
-        if (component_id){
+        if (component_id) {
             $("#base_modal").attr("id", component_id + "_modal");
             $("#base_modal_content").attr("id", component_id + "_modal_content");
             $("#base_modal_title").attr("id", component_id + "_modal_title");
             $("#base_modal_body").attr("id", component_id + "_modal_body");
 
-            $("#base_modal_toggle").attr(
-                "id", component_id + "_modal_toggle"
-            ).attr(
-                "data-target", "#" + component_id + "_modal"
-            ).css(
-                "display", "none"
-            );
+            $("#base_modal_toggle")
+                .attr("id", component_id + "_modal_toggle")
+                .attr("data-target", "#" + component_id + "_modal")
+                .css("display", "none");
 
-            $("#base_modal_dismiss").attr(
-                "id", component_id + "_modal_dismiss"
-            ).css(
-                "display", "none"
-            );
+            $("#base_modal_dismiss")
+                .attr("id", component_id + "_modal_dismiss")
+                .css("display", "none");
         }
     }
 
-    function build_modal_footer(parent, component_id=null){
+    function build_modal_footer(parent, component_id = null) {
         $("#" + parent).append('{{include "components/modal_footer.min.html"}}');
 
-        if (component_id){
+        if (component_id) {
             $("#base_modal_footer").attr("id", component_id + "_modal_footer");
         }
     }
