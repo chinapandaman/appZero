@@ -3,11 +3,11 @@
 {{block page_js}}
 {{include "utils/component_builder.html"}}
 {{include "utils/section_handler.html"}}
-{{include "utils/grid_handler.html"}}
 <script type="text/javascript">
     $(document).ready(function(){
         build_main_view_port();
-        grid_master_handler("main");
+        build_grid_row("main_view_port", "test_row");
+        build_grid_col("test_row", "test_col_1", 12);
         section_master_handler("test1");
     });
 </script>

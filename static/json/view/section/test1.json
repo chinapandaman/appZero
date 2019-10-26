@@ -1,5 +1,5 @@
 {
-    "parent": "col_1",
+    "parent": "test_col_1",
     "section_name": "test1",
     "section_title": "Test 1",
     "summary_fields": ["id", "field1", "field2", "field3"],
