@@ -47,11 +47,13 @@
             }
         }
 
-        if (type === "text") {
+        if (type === "text" || type === "number") {
             $("#" + parent).append('{{include "components/input_text.min.html"}}');
 
             if (component_id) {
-                $("#base_input").attr("id", component_id);
+                $("#base_input")
+                    .attr("id", component_id)
+                    .attr("type", type);
                 $("#base_input_label").attr("id", component_id + "_label");
             }
         }

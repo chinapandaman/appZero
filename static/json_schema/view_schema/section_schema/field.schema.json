@@ -3,6 +3,6 @@
     "required": ["name", "type"],
     "properties": {
         "name": {"type": "string"},
-        "type": {"type": "string", "enum": ["text", "checkbox"]}
+        "type": {"type": "string", "enum": ["text", "checkbox", "number"]}
     }
 }

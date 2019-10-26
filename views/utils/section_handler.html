@@ -41,6 +41,11 @@
                                 .val("")
                                 .prop("disabled", false);
                         });
+                        detail_form.find("input[type=number]").each(function() {
+                            $(this)
+                                .val("")
+                                .prop("disabled", false);
+                        });
                         detail_form.find("input:checkbox").each(function() {
                             $(this)
                                 .prop("checked", false)
@@ -61,6 +66,38 @@
                                 "primary",
                                 "Create"
                             );
+                            $("#" + section_definition["section_name"] + "_modal_create").bind("click", function() {
+                                Swal.fire({
+                                    title: "Processing...",
+                                    text: "Please wait a moment.",
+                                    allowOutsideClick: false,
+                                    showConfirmButton: false
+                                });
+                                let new_detail_data = {};
+                                detail_form.find("input").each(function() {
+                                    if ($(this).attr("type") === "checkbox") {
+                                        new_detail_data[$(this).attr("name")] = $(this).prop("checked");
+                                    } else {
+                                        new_detail_data[$(this).attr("name")] = $(this).val() ? $(this).val() : null;
+                                    }
+                                });
+                                new_detail_data["api_name"] = section_definition["section_name"];
+                                $.ajax({
+                                    url: "{{=URL('api', 'template')}}",
+                                    method: "POST",
+                                    data: new_detail_data,
+                                    success: function(data) {
+                                        Swal.fire({
+                                            title: "Success",
+                                            text: "Your request has been submitted.",
+                                            type: "success"
+                                        });
+                                    },
+                                    error: function() {
+                                        Swal.close();
+                                    }
+                                });
+                            });
                         }
                     });
                 }
