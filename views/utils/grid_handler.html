@@ -1,0 +1,20 @@
+<script type="text/javascript">
+    function grid_master_handler(grid_name) {
+        $.ajax({
+            url: "{{=URL('api', 'grids')}}" + "/" + grid_name,
+            method: "GET",
+            success: function(grid_definition) {
+                for (let i = 0; i < grid_definition["rows"].length; i++) {
+                    build_grid_row(grid_definition["parent"], grid_definition["rows"][i]["component_id"]);
+                    for (let j = 0; j < grid_definition["rows"][i]["columns"].length; i++) {
+                        build_grid_col(
+                            grid_definition["rows"][i]["component_id"],
+                            grid_definition["rows"][i]["columns"][j]["component_id"],
+                            grid_definition["rows"][i]["columns"][j]["ratio"]
+                        );
+                    }
+                }
+            }
+        });
+    }
+</script>
