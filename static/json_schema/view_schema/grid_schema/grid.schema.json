@@ -1,0 +1,8 @@
+{
+    "type": "object",
+    "required": ["parent", "rows"],
+    "properties": {
+        "parent": {"type": "string"},
+        "rows": {"type": "array", "items": {"$ref": "row.schema.json"}}
+    }
+}

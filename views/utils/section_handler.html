@@ -1,11 +1,11 @@
 <script type="text/javascript">
-    function section_master_handler(parent, section_name) {
+    function section_master_handler(section_name) {
         $.ajax({
             url: "{{=URL('api', 'sections')}}" + "/" + section_name,
             method: "GET",
             success: function(section_definition) {
                 build_card(
-                    parent,
+                    section_definition["parent"],
                     section_definition["section_name"],
                     true,
                     section_definition["allowed_operation"].includes("create")
