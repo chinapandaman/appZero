@@ -20,6 +20,13 @@
                 let modal_toggle = $("#" + section_definition["section_name"] + "_modal_toggle");
                 let modal_dismiss = $("#" + section_definition["section_name"] + "_modal_dismiss");
 
+                build_form(
+                    section_definition["section_name"] + "_modal_body",
+                    section_definition["section_name"] + "_detail_form"
+                );
+
+                let detail_form = $("#" + section_definition["section_name"] + "_detail_form");
+
                 if (section_definition["allowed_operation"].includes("create")) {
                     build_button(
                         section_definition["section_name"] + "_card_footer",
@@ -29,6 +36,16 @@
                     );
 
                     $("#" + section_definition["section_name"] + "_create").bind("click", function() {
+                        detail_form.find("input:text").each(function() {
+                            $(this)
+                                .val("")
+                                .prop("disabled", false);
+                        });
+                        detail_form.find("input:checkbox").each(function() {
+                            $(this)
+                                .prop("checked", false)
+                                .prop("disabled", false);
+                        });
                         modal_toggle.click();
                         $("#" + section_definition["section_name"] + "_modal_content")
                             .find(".modal-footer")
@@ -48,16 +65,9 @@
                     });
                 }
 
-                build_form(
-                    section_definition["section_name"] + "_modal_body",
-                    section_definition["section_name"] + "_detail_form"
-                );
-
                 let header = [];
                 for (let i = 0; i < section_definition["summary_fields"].length; i++) {
-                    if (section_definition["summary_fields"][i] !== "id") {
-                        header.push(section_definition["summary_fields"][i]);
-                    }
+                    header.push(section_definition["summary_fields"][i]);
                 }
 
                 let current_position = 0;
@@ -120,68 +130,92 @@
                             }
                             if (section_definition["allowed_operation"].includes("read")) {
                                 tr.bind("click", function() {
-                                    modal_toggle.click();
-                                    $("#" + section_definition["section_name"] + "_modal_content")
-                                        .find(".modal-footer")
-                                        .remove();
-                                    if (
-                                        section_definition["allowed_operation"].includes("update") ||
-                                        section_definition["allowed_operation"].includes("delete")
-                                    ) {
-                                        build_modal_footer(
-                                            section_definition["section_name"] + "_modal_content",
-                                            section_definition["section_name"]
-                                        );
-                                        if (section_definition["allowed_operation"].includes("update")) {
-                                            build_button(
-                                                section_definition["section_name"] + "_modal_footer",
-                                                section_definition["section_name"] + "_modal_edit",
-                                                "primary",
-                                                "Edit"
-                                            );
-                                        }
-                                        if (section_definition["allowed_operation"].includes("delete")) {
-                                            build_button(
-                                                section_definition["section_name"] + "_modal_footer",
-                                                section_definition["section_name"] + "_modal_delete",
-                                                "danger",
-                                                "Delete"
-                                            );
-                                            $("#" + section_definition["section_name"] + "_modal_delete").click(function() {
-                                                Swal.fire({
-                                                    title: "Are you sure?",
-                                                    text: "Please confirm.",
-                                                    type: "warning",
-                                                    showCancelButton: true
-                                                }).then(result => {
-                                                    if (result.value) {
-                                                        Swal.fire({
-                                                            title: "Processing...",
-                                                            text: "Please wait a moment.",
-                                                            allowOutsideClick: false,
-                                                            showConfirmButton: false
-                                                        });
-                                                        $.ajax({
-                                                            url: "{{=URL('api', 'template')}}" + "/" + id,
-                                                            method: "DELETE",
-                                                            data: {
-                                                                api_name: section_definition["section_name"]
-                                                            },
-                                                            success: function() {
-                                                                Swal.fire({
-                                                                    title: "Success",
-                                                                    text: "Your request has been submitted.",
-                                                                    type: "success"
-                                                                });
-                                                                modal_dismiss.click();
-                                                                table_body.find("tr[name=" + id + "]").remove();
-                                                            }
-                                                        });
-                                                    }
-                                                });
+                                    Swal.fire({
+                                        title: "Processing...",
+                                        text: "Please wait a moment.",
+                                        allowOutsideClick: false,
+                                        showConfirmButton: false
+                                    });
+                                    $.ajax({
+                                        url: "{{=URL('api', 'template')}}" + "/" + id,
+                                        method: "GET",
+                                        data: { api_name: section_definition["api_name"] },
+                                        success: function(detail_data) {
+                                            Swal.close();
+                                            detail_form.find("input").each(function() {
+                                                if (typeof detail_data[$(this).attr("name")] === "boolean") {
+                                                    $(this).prop("checked", detail_data[$(this).attr("name")]);
+                                                } else {
+                                                    $(this).val(detail_data[$(this).attr("name")]);
+                                                }
+                                                $(this).prop("disabled", true);
                                             });
+                                            modal_toggle.click();
+                                            $("#" + section_definition["section_name"] + "_modal_content")
+                                                .find(".modal-footer")
+                                                .remove();
+                                            if (
+                                                section_definition["allowed_operation"].includes("update") ||
+                                                section_definition["allowed_operation"].includes("delete")
+                                            ) {
+                                                build_modal_footer(
+                                                    section_definition["section_name"] + "_modal_content",
+                                                    section_definition["section_name"]
+                                                );
+                                                if (section_definition["allowed_operation"].includes("update")) {
+                                                    build_button(
+                                                        section_definition["section_name"] + "_modal_footer",
+                                                        section_definition["section_name"] + "_modal_edit",
+                                                        "primary",
+                                                        "Edit"
+                                                    );
+                                                }
+                                                if (section_definition["allowed_operation"].includes("delete")) {
+                                                    build_button(
+                                                        section_definition["section_name"] + "_modal_footer",
+                                                        section_definition["section_name"] + "_modal_delete",
+                                                        "danger",
+                                                        "Delete"
+                                                    );
+                                                    $("#" + section_definition["section_name"] + "_modal_delete").click(
+                                                        function() {
+                                                            Swal.fire({
+                                                                title: "Are you sure?",
+                                                                text: "Please confirm.",
+                                                                type: "warning",
+                                                                showCancelButton: true
+                                                            }).then(result => {
+                                                                if (result.value) {
+                                                                    Swal.fire({
+                                                                        title: "Processing...",
+                                                                        text: "Please wait a moment.",
+                                                                        allowOutsideClick: false,
+                                                                        showConfirmButton: false
+                                                                    });
+                                                                    $.ajax({
+                                                                        url: "{{=URL('api', 'template')}}" + "/" + id,
+                                                                        method: "DELETE",
+                                                                        data: {
+                                                                            api_name: section_definition["section_name"]
+                                                                        },
+                                                                        success: function() {
+                                                                            Swal.fire({
+                                                                                title: "Success",
+                                                                                text: "Your request has been submitted.",
+                                                                                type: "success"
+                                                                            });
+                                                                            modal_dismiss.click();
+                                                                            table_body.find("tr[name=" + id + "]").remove();
+                                                                        }
+                                                                    });
+                                                                }
+                                                            });
+                                                        }
+                                                    );
+                                                }
+                                            }
                                         }
-                                    }
+                                    });
                                 });
                             }
 
