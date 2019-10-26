@@ -1,7 +1,6 @@
 {
     "type": "object",
     "required": [
-        "parent",
         "section_name",
         "section_title",
         "summary_fields",
@@ -9,7 +8,6 @@
         "api_name"
     ],
     "properties": {
-        "parent": {"type": "string"},
         "section_name": {"type": "string"},
         "section_title": {"type": "string"},
         "summary_fields": {"type": "array", "items": {"type": "string"}},

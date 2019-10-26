@@ -35,8 +35,3 @@ class AppZeroFactory(object):
             from app_factory.view.section.section import Section
 
             return Section(db=self._db, param=self._component.split("/")[1])
-
-        if self._component.split("/")[0] == "grid":
-            from app_factory.view.grid.grid import Grid
-
-            return Grid(db=self._db, param=self._component.split("/")[1])

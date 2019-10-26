@@ -1,8 +1,0 @@
-{
-    "type": "object",
-    "required": ["component_id", "columns"],
-    "properties": {
-        "component_id": {"type": "string"},
-        "columns": {"type": "array", "items": {"$ref": "column.schema.json"}}
-    }
-}

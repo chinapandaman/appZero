@@ -1,6 +1,0 @@
-{
-    "parent": "main_view_port",
-    "rows": [
-        {"component_id": "row_1", "columns": [{"component_id": "col_1", "ratio": 12}]}
-    ]
-}

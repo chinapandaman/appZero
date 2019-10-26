@@ -1,5 +1,0 @@
-{
-    "type": "object",
-    "required": ["component_id", "ratio"],
-    "properties": {"component_id": {"type": "string"}, "ratio": {"type": "number"}}
-}
