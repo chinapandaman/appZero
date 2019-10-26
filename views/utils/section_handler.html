@@ -87,11 +87,14 @@
                                     method: "POST",
                                     data: new_detail_data,
                                     success: function(data) {
+                                        modal_dismiss.click();
                                         Swal.fire({
                                             title: "Success",
                                             text: "Your request has been submitted.",
                                             type: "success"
                                         });
+
+                                        // TODO: implement dynamic effect
                                     },
                                     error: function() {
                                         Swal.close();
