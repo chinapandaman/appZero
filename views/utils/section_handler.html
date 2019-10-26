@@ -48,10 +48,48 @@
                     });
                 }
 
+                build_form(
+                    section_definition["section_name"] + "_modal_body",
+                    section_definition["section_name"] + "_detail_form"
+                );
+
                 let header = [];
                 for (let i = 0; i < section_definition["summary_fields"].length; i++) {
                     if (section_definition["summary_fields"][i] !== "id") {
                         header.push(section_definition["summary_fields"][i]);
+                    }
+                }
+
+                let current_position = 0;
+                let num_of_rows = 0;
+                for (let i = 0; i < section_definition["detail_fields"].length; i++) {
+                    if (!current_position) {
+                        build_grid_row(
+                            section_definition["section_name"] + "_detail_form",
+                            section_definition["section_name"] + "_detail_row_" + num_of_rows
+                        );
+                    }
+                    build_grid_col(
+                        section_definition["section_name"] + "_detail_row_" + num_of_rows,
+                        section_definition["section_name"] + "_detail_col_" + i,
+                        section_definition["detail_ratio"]
+                    );
+                    build_input(
+                        section_definition["section_name"] + "_detail_col_" + i,
+                        section_definition["section_name"] + "-" + section_definition["detail_fields"][i]
+                    );
+                    build_input_display_name(
+                        section_definition["section_name"] + "-" + section_definition["detail_fields"][i],
+                        section_definition["detail_fields"][i]
+                    );
+                    $("#" + section_definition["section_name"] + "-" + section_definition["detail_fields"][i]).attr(
+                        "name",
+                        section_definition["detail_fields"][i]
+                    );
+                    current_position++;
+                    if (current_position >= 12 / section_definition["detail_ratio"]) {
+                        current_position = 0;
+                        num_of_rows++;
                     }
                 }
 
