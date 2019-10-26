@@ -5,7 +5,8 @@
         "section_title",
         "summary_fields",
         "allowed_operation",
-        "api_name"
+        "api_name",
+        "horizontal_ratio"
     ],
     "properties": {
         "section_name": {"type": "string"},
@@ -15,6 +16,7 @@
             "type": "array",
             "items": {"type": "string", "enum": ["create", "read", "update", "delete"]}
         },
-        "api_name": {"type": "string"}
+        "api_name": {"type": "string"},
+        "horizontal_ratio": {"type": "number"}
     }
 }
