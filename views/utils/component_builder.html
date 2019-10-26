@@ -37,17 +37,28 @@
         }
     }
 
-    function build_input(parent, component_id = null) {
-        $("#" + parent).append('{{include "components/input_text.min.html"}}');
+    function build_input(parent, component_id = null, type = "text") {
+        if (type === "checkbox") {
+            $("#" + parent).append('{{include "components/input_checkbox.min.html"}}');
 
-        if (component_id) {
-            $("#base_input").attr("id", component_id);
-            $("#base_input_label").attr("id", component_id + "_label");
+            if (component_id) {
+                $("#base_checkbox").attr("id", component_id);
+                $("#base_checkbox_label").attr("id", component_id + "_label");
+            }
+        }
+
+        if (type === "text") {
+            $("#" + parent).append('{{include "components/input_text.min.html"}}');
+
+            if (component_id) {
+                $("#base_input").attr("id", component_id);
+                $("#base_input_label").attr("id", component_id + "_label");
+            }
         }
     }
 
     function build_input_display_name(input_id, label) {
-        $("#" + input_id + "_label").html(label);
+        $("#" + input_id + "_label").append(label);
     }
 
     function build_card(parent, component_id = null, has_header = false, has_footer = false) {

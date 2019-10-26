@@ -14,7 +14,7 @@
         "section_name": {"type": "string"},
         "section_title": {"type": "string"},
         "summary_fields": {"type": "array", "items": {"type": "string"}},
-        "detail_fields": {"type": "array", "items": {"type": "string"}},
+        "detail_fields": {"type": "array", "items": {"$ref": "field.schema.json"}},
         "allowed_operation": {
             "type": "array",
             "items": {"type": "string", "enum": ["create", "read", "update", "delete"]}

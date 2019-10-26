@@ -2,7 +2,12 @@
     "section_name": "test1",
     "section_title": "Test 1",
     "summary_fields": ["field1", "field2", "field3"],
-    "detail_fields": ["id", "field1", "field2", "field3"],
+    "detail_fields": [
+        {"name": "id", "type": "text"},
+        {"name": "field1", "type": "text"},
+        {"name": "field3", "type": "text"},
+        {"name": "field2", "type": "checkbox"}
+    ],
     "allowed_operation": ["create", "read", "update", "delete"],
     "api_name": "test1",
     "horizontal_ratio": 12,

@@ -76,15 +76,16 @@
                     );
                     build_input(
                         section_definition["section_name"] + "_detail_col_" + i,
-                        section_definition["section_name"] + "-" + section_definition["detail_fields"][i]
+                        section_definition["section_name"] + "-" + section_definition["detail_fields"][i]["name"],
+                        section_definition["detail_fields"][i]["type"]
                     );
                     build_input_display_name(
-                        section_definition["section_name"] + "-" + section_definition["detail_fields"][i],
-                        section_definition["detail_fields"][i]
+                        section_definition["section_name"] + "-" + section_definition["detail_fields"][i]["name"],
+                        section_definition["detail_fields"][i]["name"]
                     );
-                    $("#" + section_definition["section_name"] + "-" + section_definition["detail_fields"][i]).attr(
+                    $("#" + section_definition["section_name"] + "-" + section_definition["detail_fields"][i]["name"]).attr(
                         "name",
-                        section_definition["detail_fields"][i]
+                        section_definition["detail_fields"][i]["name"]
                     );
                     current_position++;
                     if (current_position >= 12 / section_definition["detail_ratio"]) {
