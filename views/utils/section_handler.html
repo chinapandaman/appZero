@@ -144,13 +144,14 @@
                     }
                 }
 
-                // TODO: spinning loading effect
+                build_spinner(section_definition["section_name"] + "_card_body", section_definition["section_name"]);
 
                 $.ajax({
                     url: "{{=URL('api', 'template')}}",
                     method: "GET",
                     data: { api_name: section_definition["api_name"] },
                     success: function(section_data) {
+                        $("#" + section_definition["section_name"] + "_spinner").remove();
                         build_table(
                             section_definition["section_name"] + "_card_body",
                             section_definition["section_name"] + "_table"

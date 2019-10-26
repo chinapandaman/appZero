@@ -139,4 +139,12 @@
             $("#base_modal_footer").attr("id", component_id + "_modal_footer");
         }
     }
+
+    function build_spinner(parent, component_id = null) {
+        $("#" + parent).append('{{include "components/spinner.min.html"}}');
+
+        if (component_id) {
+            $("#base_spinner").attr("id", component_id + "_spinner");
+        }
+    }
 </script>
