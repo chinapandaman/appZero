@@ -1,7 +1,7 @@
 {
     "section_name": "test1",
     "section_title": "Test 1",
-    "summary_fields": ["id", "field1", "field3"],
+    "summary_fields": ["field1", "field3"],
     "detail_fields": [
         {"name": "field1", "type": "text"},
         {"name": "field3", "type": "number"},
