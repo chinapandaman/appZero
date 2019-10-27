@@ -17,8 +17,7 @@
 
                 $("#" + section_definition["section_name"] + "_modal_title").html(section_definition["section_title"]);
 
-                let modal_toggle = $("#" + section_definition["section_name"] + "_modal_toggle");
-                let modal_dismiss = $("#" + section_definition["section_name"] + "_modal_dismiss");
+                let section_modal = $("#" + section_definition["section_name"] + "_modal");
 
                 build_form(
                     section_definition["section_name"] + "_modal_body",
@@ -51,7 +50,7 @@
                                 .prop("checked", false)
                                 .prop("disabled", false);
                         });
-                        modal_toggle.click();
+                        section_modal.modal();
                         $("#" + section_definition["section_name"] + "_modal_content")
                             .find(".modal-footer")
                             .remove();
@@ -87,7 +86,7 @@
                                     method: "POST",
                                     data: new_detail_data,
                                     success: function(data) {
-                                        modal_dismiss.click();
+                                        section_modal.modal("hide");
                                         Swal.fire({
                                             title: "Success",
                                             text: "Your request has been submitted.",
@@ -191,7 +190,7 @@
                                                 }
                                                 $(this).prop("disabled", true);
                                             });
-                                            modal_toggle.click();
+                                            section_modal.modal();
                                             $("#" + section_definition["section_name"] + "_modal_content")
                                                 .find(".modal-footer")
                                                 .remove();
@@ -245,7 +244,7 @@
                                                                                 text: "Your request has been submitted.",
                                                                                 type: "success"
                                                                             });
-                                                                            modal_dismiss.click();
+                                                                            section_modal.modal("hide");
                                                                             table_body.find("tr[name=" + id + "]").remove();
                                                                         }
                                                                     });
