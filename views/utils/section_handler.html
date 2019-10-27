@@ -55,12 +55,97 @@
                                             section_definition["section_name"]
                                         );
                                         if (section_definition["allowed_operation"].includes("update")) {
+                                            let modal_footer = $(
+                                                "#" + section_definition["section_name"] + "_modal_footer"
+                                            );
                                             build_button(
                                                 section_definition["section_name"] + "_modal_footer",
                                                 section_definition["section_name"] + "_modal_edit",
                                                 "primary",
                                                 "Edit"
                                             );
+                                            build_button(
+                                                section_definition["section_name"] + "_modal_footer",
+                                                section_definition["section_name"] + "_modal_submit_edit",
+                                                "primary",
+                                                "Submit"
+                                            );
+                                            build_button(
+                                                section_definition["section_name"] + "_modal_footer",
+                                                section_definition["section_name"] + "_modal_cancel_edit",
+                                                "danger",
+                                                "Cancel"
+                                            );
+                                            let modal_submit_edit = $(
+                                                "#" + section_definition["section_name"] + "_modal_submit_edit"
+                                            ).css("display", "none");
+                                            let modal_cancel_edit = $(
+                                                "#" + section_definition["section_name"] + "_modal_cancel_edit"
+                                            ).css("display", "none");
+                                            let modal_edit = $("#" + section_definition["section_name"] + "_modal_edit");
+                                            modal_edit.bind("click", function() {
+                                                modal_submit_edit.css("display", "block");
+                                                modal_cancel_edit.css("display", "block");
+
+                                                $(this).css("display", "none");
+
+                                                detail_form.find("input").each(function() {
+                                                    $(this).prop("disabled", false);
+                                                });
+                                            });
+                                            modal_cancel_edit.bind("click", function() {
+                                                modal_submit_edit.css("display", "none");
+                                                modal_edit.css("display", "block");
+
+                                                $(this).css("display", "none");
+
+                                                detail_form.find("input").each(function() {
+                                                    $(this).prop("disabled", true);
+                                                });
+                                            });
+                                            modal_submit_edit.bind("click", function() {
+                                                Swal.fire({
+                                                    title: "Processing...",
+                                                    text: "Please wait a moment.",
+                                                    allowOutsideClick: false,
+                                                    showConfirmButton: false
+                                                });
+                                                let edited_detail_data = {};
+                                                detail_form.find("input").each(function() {
+                                                    if ($(this).attr("type") === "checkbox") {
+                                                        edited_detail_data[$(this).attr("name")] = $(this).prop("checked");
+                                                    } else {
+                                                        edited_detail_data[$(this).attr("name")] = $(this).val()
+                                                            ? $(this).val()
+                                                            : null;
+                                                    }
+                                                });
+                                                edited_detail_data["api_name"] = section_definition["section_name"];
+                                                $.ajax({
+                                                    url: "{{=URL('api', 'template')}}" + "/" + id,
+                                                    method: "PUT",
+                                                    data: edited_detail_data,
+                                                    success: function(data) {
+                                                        Swal.fire({
+                                                            title: "Success",
+                                                            text: "Your request has been submitted.",
+                                                            type: "success"
+                                                        });
+                                                        get_summary(section_definition, header, detail_form, section_modal);
+
+                                                        modal_submit_edit.css("display", "none");
+                                                        modal_cancel_edit.css("display", "none");
+                                                        modal_edit.css("display", "block");
+
+                                                        detail_form.find("input").each(function() {
+                                                            $(this).prop("disabled", true);
+                                                        });
+                                                    },
+                                                    error: function() {
+                                                        Swal.close();
+                                                    }
+                                                });
+                                            });
                                         }
                                         if (section_definition["allowed_operation"].includes("delete")) {
                                             build_button(
