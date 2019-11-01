@@ -1,10 +1,59 @@
 <script type="text/javascript">
-    function get_summary(section_definition, header, detail_form, section_modal) {
+    function get_view_persistence(section_definition, previous_method) {
+        let page = null;
+        let order_col = null;
+        let order_method = null;
+        $("#" + section_definition["section_name"] + "_table_paginate > ul")
+            .find("li")
+            .each(function() {
+                if ($(this).hasClass("active")) {
+                    page =
+                        parseInt(
+                            $(this)
+                                .find("a")
+                                .attr("data-dt-idx")
+                        ) - 1;
+                    if (
+                        $("#" + section_definition["section_name"] + "_table_table_body").find("tr").length === 1 &&
+                        page > 0 &&
+                        previous_method === "delete"
+                    ) {
+                        page--;
+                    }
+                    return;
+                }
+            });
+        $("#" + section_definition["section_name"] + "_table_table_header")
+            .find("th")
+            .each(function(index) {
+                if (!$(this).hasClass("sorting")) {
+                    order_col = index;
+                    order_method = $(this)
+                        .attr("class")
+                        .split("_")[1];
+                    return;
+                }
+            });
+        return {
+            show: parseInt($("#" + section_definition["section_name"] + "_table_length > label > select").val()),
+            search: $("#" + section_definition["section_name"] + "_table_filter > label > input").val(),
+            page: page,
+            order: {
+                col: order_col,
+                method: order_method
+            }
+        };
+    }
+
+    function get_summary(section_definition, header, detail_form, section_modal, previous_method) {
         $.ajax({
             url: "{{=URL('api', 'template')}}",
             method: "GET",
             data: { api_name: section_definition["api_name"] },
             success: function(section_data) {
+                if (previous_method !== "read") {
+                    var view_persistence = get_view_persistence(section_definition, previous_method);
+                }
                 $("#" + section_definition["section_name"] + "_card_body").empty();
                 build_table(
                     section_definition["section_name"] + "_card_body",
@@ -131,7 +180,13 @@
                                                             text: "Your request has been submitted.",
                                                             type: "success"
                                                         });
-                                                        get_summary(section_definition, header, detail_form, section_modal);
+                                                        get_summary(
+                                                            section_definition,
+                                                            header,
+                                                            detail_form,
+                                                            section_modal,
+                                                            "edit"
+                                                        );
 
                                                         modal_submit_edit.css("display", "none");
                                                         modal_cancel_edit.css("display", "none");
@@ -185,7 +240,8 @@
                                                                     section_definition,
                                                                     header,
                                                                     detail_form,
-                                                                    section_modal
+                                                                    section_modal,
+                                                                    "delete"
                                                                 );
                                                             }
                                                         });
@@ -202,7 +258,16 @@
                     table_body.append(tr);
                 }
 
-                $("#" + section_definition["section_name"] + "_table").DataTable({ order: [0, "desc"] });
+                let section_table = $("#" + section_definition["section_name"] + "_table").DataTable({
+                    order: [0, "desc"]
+                });
+                if (previous_method !== "read") {
+                    section_table.search(view_persistence["search"]);
+                    section_table.order([view_persistence["order"]["col"], view_persistence["order"]["method"]]);
+                    section_table.page.len(view_persistence["show"]);
+                    section_table.draw();
+                    section_table.page(view_persistence["page"]).draw(false);
+                }
             }
         });
     }
@@ -300,7 +365,7 @@
                                             text: "Your request has been submitted.",
                                             type: "success"
                                         });
-                                        get_summary(section_definition, header, detail_form, section_modal);
+                                        get_summary(section_definition, header, detail_form, section_modal, "create");
                                     },
                                     error: function() {
                                         Swal.close();
@@ -351,7 +416,7 @@
                 }
 
                 build_spinner(section_definition["section_name"] + "_card_body", section_definition["section_name"]);
-                get_summary(section_definition, header, detail_form, section_modal);
+                get_summary(section_definition, header, detail_form, section_modal, "read");
             }
         });
     }
