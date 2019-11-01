@@ -1,8 +1,8 @@
 <script type="text/javascript">
     function get_view_persistence(section_definition, previous_method) {
-        let page = null;
-        let order_col = null;
-        let order_method = null;
+        let page = 0;
+        let order_col = 0;
+        let order_method = "desc";
         $("#" + section_definition["section_name"] + "_table_paginate > ul")
             .find("li")
             .each(function() {
