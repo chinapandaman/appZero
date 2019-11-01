@@ -20,7 +20,7 @@
                     ) {
                         page--;
                     }
-                    return;
+                    return 1;
                 }
             });
         $("#" + section_definition["section_name"] + "_table_table_header")
@@ -31,7 +31,7 @@
                     order_method = $(this)
                         .attr("class")
                         .split("_")[1];
-                    return;
+                    return 1;
                 }
             });
         return {
@@ -104,9 +104,6 @@
                                             section_definition["section_name"]
                                         );
                                         if (section_definition["allowed_operation"].includes("update")) {
-                                            let modal_footer = $(
-                                                "#" + section_definition["section_name"] + "_modal_footer"
-                                            );
                                             build_button(
                                                 section_definition["section_name"] + "_modal_footer",
                                                 section_definition["section_name"] + "_modal_edit",
@@ -174,7 +171,7 @@
                                                     url: "{{=URL('api', 'template')}}" + "/" + id,
                                                     method: "PUT",
                                                     data: edited_detail_data,
-                                                    success: function(data) {
+                                                    success: function() {
                                                         Swal.fire({
                                                             title: "Success",
                                                             text: "Your request has been submitted.",
@@ -358,7 +355,7 @@
                                     url: "{{=URL('api', 'template')}}",
                                     method: "POST",
                                     data: new_detail_data,
-                                    success: function(data) {
+                                    success: function() {
                                         section_modal.modal("hide");
                                         Swal.fire({
                                             title: "Success",
