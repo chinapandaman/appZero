@@ -1,0 +1,8 @@
+{
+    "type": "object",
+    "required": ["page_name", "sections"],
+    "properties": {
+        "page_name": {"type": "string"},
+        "sections": {"type": "array", "items": {"type": "string"}}
+    }
+}
