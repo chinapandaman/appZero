@@ -9,6 +9,5 @@
     ],
     "allowed_operation": ["create", "read", "update", "delete"],
     "api_name": "test1",
-    "horizontal_ratio": 12,
     "detail_ratio": 6
 }

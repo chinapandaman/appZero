@@ -274,9 +274,8 @@
             url: "{{=URL('api', 'sections')}}" + "/" + section_name,
             method: "GET",
             success: function(section_definition) {
-                build_grid_col(parent, section_definition["section_name"] + "_col", section_definition["horizontal_ratio"]);
                 build_card(
-                    section_definition["section_name"] + "_col",
+                    parent,
                     section_definition["section_name"],
                     true,
                     section_definition["allowed_operation"].includes("create")
@@ -289,6 +288,7 @@
 
                 let section_modal = $("#" + section_definition["section_name"] + "_modal");
 
+                // TODO: deprecate detail form
                 build_form(
                     section_definition["section_name"] + "_modal_body",
                     section_definition["section_name"] + "_detail_form"

@@ -35,3 +35,8 @@ class AppZeroFactory(object):
             from app_factory.view.section.section import Section
 
             return Section(db=self._db, param=self._component.split("/")[1])
+
+        if self._component.split("/")[0] == "page":
+            from app_factory.view.page.page import Page
+
+            return Page(db=self._db, param=self._component.split("/")[1])

@@ -72,3 +72,22 @@ def sections():
         )
 
     return locals()
+
+
+@request.restful()
+def pages():
+    def GET(*args, **params):
+        if not len(args):
+            raise HTTP(400)
+
+        return response.json(
+            AppZeroFactory(
+                layer="view",
+                component="page/{component}".format(component=args[0]),
+                db=db,
+            )
+            .build()
+            .data
+        )
+
+    return locals()
