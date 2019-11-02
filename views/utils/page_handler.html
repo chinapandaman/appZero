@@ -1,0 +1,38 @@
+<script type="text/javascript">
+    function page_master_handler() {
+        build_main_view_port();
+        let page_name = "index";
+        if (window.location.href.split("?").length > 1) {
+            let param = {};
+            window.location.href
+                .split("?")[1]
+                .split("&")
+                .forEach(function(item) {
+                    param[item.split("=")[0]] = item.split("=")[1];
+                });
+            if ("page" in param) {
+                page_name = param["page"];
+            }
+        }
+        $.ajax({
+            url: "{{=URL('api', 'pages')}}" + "/" + page_name,
+            method: "GET",
+            success: function(page_definition) {
+                for (let i = 0; i < page_definition["rows"].length; i++) {
+                    build_grid_row("main_view_port", "main_grid_row_" + i);
+                    for (let j = 0; j < page_definition["rows"][i].length; j++) {
+                        build_grid_col(
+                            "main_grid_row_" + i,
+                            page_definition["rows"][i][j]["section_name"] + "_col",
+                            page_definition["rows"][i][j]["col_ratio"]
+                        );
+                        section_master_handler(
+                            page_definition["rows"][i][j]["section_name"] + "_col",
+                            page_definition["rows"][i][j]["section_name"]
+                        );
+                    }
+                }
+            }
+        });
+    }
+</script>

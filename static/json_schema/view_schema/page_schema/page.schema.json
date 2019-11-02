@@ -1,8 +1,21 @@
 {
     "type": "object",
-    "required": ["page_name", "sections"],
+    "required": ["page_name", "rows"],
     "properties": {
         "page_name": {"type": "string"},
-        "sections": {"type": "array", "items": {"type": "string"}}
+        "rows": {
+            "type": "array",
+            "items": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "required": ["section_name", "col_ratio"],
+                    "properties": {
+                        "section_name": {"type": "string"},
+                        "col_ratio": {"type": "number", "enum": [1, 2, 3, 4, 6, 12]}
+                    }
+                }
+            }
+        }
     }
 }
