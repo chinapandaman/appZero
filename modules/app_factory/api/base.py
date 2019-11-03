@@ -33,7 +33,7 @@ class API(AppZero):
         for each in self.data["supported_methods"]:
             if each not in self.data:
                 raise Exception(
-                    "missing method definition: {method}".format(method=each)
+                    "missing method definition: '{method}'".format(method=each)
                 )
 
     def _method_validate(self, method):
