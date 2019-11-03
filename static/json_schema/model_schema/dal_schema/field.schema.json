@@ -3,7 +3,7 @@
     "required": ["field_name", "field_type"],
     "properties": {
         "field_name": {"type": "string"},
-        "field_type": {"type": "string"},
+        "field_type": {"type": "string", "enum": ["string", "boolean", "integer"]},
         "field_length": {"type": "number"},
         "field_is_required": {"type": "boolean"},
         "field_is_unique": {"type": "boolean"}
