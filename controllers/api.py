@@ -1,6 +1,10 @@
+# -*- coding: utf-8 -*-
+
+
 from app_factory.factory import AppZeroFactory
 
 
+@auth.requires_login()
 @request.restful()
 def template():
     def GET(*args, **params):
@@ -55,6 +59,7 @@ def template():
     return locals()
 
 
+@auth.requires_login()
 @request.restful()
 def sections():
     def GET(*args, **params):
@@ -74,6 +79,7 @@ def sections():
     return locals()
 
 
+@auth.requires_login()
 @request.restful()
 def pages():
     def GET(*args, **params):

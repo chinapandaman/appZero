@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import json
 
 from utils.json_schema import validate_json_obj
