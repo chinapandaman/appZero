@@ -15,10 +15,12 @@ This is a web2py application. Please read the [web2py book](http://www.web2py.co
 * Example app JSON
 * Example app builder
 * API developer view
+* Permission
 * Notification system
 * Move front end dependency to static directory
 * Front end utils refactor
 * Complex JSON back end support
 * Complex JSON front end support
+* Better JSON schema
 * Rules engine
 * PDF engine
