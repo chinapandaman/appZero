@@ -1,4 +1,4 @@
-# appZero
+# AppZero
 
 AppZero is a [web2py](http://www.web2py.com/) based full stack web application template. It provides a JSON and JSON schema driven approach for web application development.
 
