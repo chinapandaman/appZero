@@ -23,6 +23,6 @@ This is a web2py application. Please read the [web2py book](http://www.web2py.co
 * Complex JSON front end support
 * Better JSON schema
 * Rules engine
-* PDF engine
+* PDF engine - In Progress
 * Utility tests
 * Web2py tests

@@ -1,1 +1,5 @@
 jsonschema
+pdfrw
+pillow
+PyPDF2
+reportlab
