@@ -13,6 +13,8 @@ from gluon import current
 
 
 class PDFForm(object):
+    # TODO: checkboxes, even pages rotation?
+
     _ANNOT_KEY = "/Annots"
     _ANNOT_FIELD_KEY = "/T"
     _ANNOT_RECT_KEY = "/Rect"
@@ -50,16 +52,15 @@ class PDFForm(object):
     def _fill_pdf_canvas(self):
         template_pdf = pdfrw.PdfReader(self._template_path)
         layers = []
-        
+
         for i in range(len(template_pdf.pages)):
             layer_path = os.path.join(
                 current.request.folder, "temp", uuid.uuid4().hex + ".pdf"
             )
             layers.append(layer_path)
-            
+
             canv = canvas.Canvas(
-                layer_path,
-                pagesize=(self._LAYER_SIZE_X, self._LAYER_SIZE_Y)
+                layer_path, pagesize=(self._LAYER_SIZE_X, self._LAYER_SIZE_Y)
             )
             canv.setFont(self._CANVAS_FONT, self._global_font_size)
 
@@ -86,13 +87,10 @@ class PDFForm(object):
                             else:
                                 coordinates = annotation[self._ANNOT_RECT_KEY]
                                 annotations.pop(j)
-                                if len(self._data_dict[key]) < self._max_txt_length: 
+                                if len(self._data_dict[key]) < self._max_txt_length:
                                     canv.drawString(
                                         float(coordinates[0]),
-                                        (
-                                            float(coordinates[1])
-                                            + float(coordinates[3])
-                                        )
+                                        (float(coordinates[1]) + float(coordinates[3]))
                                         / 2
                                         - 2,
                                         self._data_dict[key],
@@ -109,18 +107,13 @@ class PDFForm(object):
                                         )
                                         start += self._max_txt_length
                                         end += self._max_txt_length
-                                    txt_obj.textLine(
-                                        self._data_dict[key][start:]
-                                    )
+                                    txt_obj.textLine(self._data_dict[key][start:])
                                     canv.saveState()
                                     canv.translate(
                                         float(coordinates[0]),
-                                        (
-                                            float(coordinates[1])
-                                            + float(coordinates[3])
-                                        )
+                                        (float(coordinates[1]) + float(coordinates[3]))
                                         / 2
-                                        - 2
+                                        - 2,
                                     )
                                     canv.drawText(txt_obj)
                                     canv.restoreState()
@@ -142,7 +135,6 @@ class PDFForm(object):
                 merger.add(layer_pdf.pages[0]).render()
 
         output_file.write(self._final_path, input_file)
-
 
     def _fill_pdf(self):
         template_pdf = pdfrw.PdfReader(self._template_path)
