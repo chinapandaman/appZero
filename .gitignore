@@ -12,3 +12,4 @@ uploads/
 *.bak
 *.log
 .env
+temp/
