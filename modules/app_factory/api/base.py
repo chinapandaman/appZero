@@ -31,11 +31,33 @@ class API(AppZero):
         )
 
     def _api_validate(self):
+        if self.data["table_name"] not in self._db.tables:
+            raise ValidationError(
+                "missing table definition: '{table}'".format(
+                    table=self.data["table_name"]
+                )
+            )
+
         for each in self.data["supported_methods"]:
             if each not in self.data:
                 raise ValidationError(
                     "missing method definition: '{method}'".format(method=each)
                 )
+
+        if "GET" in self.data["supported_methods"]:
+            if "queryable_fields" in self.data["GET"]:
+                for each in self.data["GET"]["queryable_fields"]:
+                    if each not in self._db[self.data["table_name"]].fields:
+                        raise ValidationError(
+                            "invalid queryable field '{field}'".format(field=each)
+                        )
+
+            if "selectors" in self.data["GET"]:
+                for each in self.data["GET"]["selectors"]:
+                    if each not in self._db[self.data["table_name"]].fields:
+                        raise ValidationError(
+                            "invalid selector '{field}'".format(field=each)
+                        )
 
     def _method_validate(self, method):
         if method not in self.data["supported_methods"]:
