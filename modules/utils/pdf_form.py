@@ -66,7 +66,7 @@ class PDFForm(object):
 
             annotations = template_pdf.pages[i][self._ANNOT_KEY]
             if annotations:
-                for j in range(len(annotations)):
+                for j in reversed(range(len(annotations))):
                     annotation = annotations[j]
 
                     if (
@@ -161,10 +161,7 @@ class PDFForm(object):
     def _bools_to_checkboxes(self):
         for k, v in self._data_dict.items():
             if isinstance(v, bool):
-                if not v:
-                    self._data_dict[k] = None
-                else:
-                    self._data_dict[k] = pdfrw.PdfName.Yes if v else pdfrw.PdfName.Off
+                self._data_dict[k] = pdfrw.PdfName.Yes if v else pdfrw.PdfName.Off
 
     def _assign_uuid(self):
         generated_pdf = pdfrw.PdfReader(self._output_path)
