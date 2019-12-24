@@ -59,6 +59,26 @@ class API(AppZero):
                             "invalid selector '{field}'".format(field=each)
                         )
 
+        if (
+            "POST" in self.data["supported_methods"]
+            and "allowed_fields" in self.data["POST"]
+        ):
+            for each in self.data["POST"]["allowed_fields"]:
+                if each not in self._db[self.data["table_name"]].fields:
+                    raise ValidationError(
+                        "invalid allowed POST field '{field}'".format(field=each)
+                    )
+
+        if (
+            "PUT" in self.data["supported_methods"]
+            and "allowed_fields" in self.data["PUT"]
+        ):
+            for each in self.data["PUT"]["allowed_fields"]:
+                if each not in self._db[self.data["table_name"]].fields:
+                    raise ValidationError(
+                        "invalid allowed PUT field '{field}'".format(field=each)
+                    )
+
     def _method_validate(self, method):
         if method not in self.data["supported_methods"]:
             raise HTTP(405)
@@ -100,7 +120,7 @@ class API(AppZero):
     def post(self, data):
         self._method_validate("POST")
 
-        if self.data["POST"]["allowed_fields"] and any(
+        if self.data["POST"].get("allowed_fields") and any(
             [each not in self.data["POST"]["allowed_fields"] for each in data.keys()]
         ):
             raise HTTP(400)
@@ -115,7 +135,7 @@ class API(AppZero):
     def put(self, table_id, data):
         self._method_validate("PUT")
 
-        if self.data["PUT"]["allowed_fields"] and any(
+        if self.data["PUT"].get("allowed_fields") and any(
             [each not in self.data["PUT"]["allowed_fields"] for each in data.keys()]
         ):
             raise HTTP(400)
