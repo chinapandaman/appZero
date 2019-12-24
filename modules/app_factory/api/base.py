@@ -3,9 +3,10 @@
 
 import os
 
-from gluon import current, HTTP
+from jsonschema import ValidationError
 
 from app_factory.base import AppZero
+from gluon import HTTP, current
 
 
 class API(AppZero):
@@ -32,7 +33,7 @@ class API(AppZero):
     def _api_validate(self):
         for each in self.data["supported_methods"]:
             if each not in self.data:
-                raise Exception(
+                raise ValidationError(
                     "missing method definition: '{method}'".format(method=each)
                 )
 
