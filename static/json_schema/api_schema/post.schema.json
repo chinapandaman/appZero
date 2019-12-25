@@ -1,6 +1,6 @@
 {
     "type": "object",
-    "required": ["allow_duplicates", "allowed_fields"],
+    "required": ["allow_duplicates"],
     "properties": {
         "allow_duplicates": {"type": "boolean"},
         "allowed_fields": {"type": "array", "items": {"type": "string"}}

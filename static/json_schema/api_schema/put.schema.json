@@ -1,5 +1,5 @@
 {
     "type": "object",
-    "required": ["allowed_fields"],
+    "required": [],
     "properties": {"allowed_fields": {"type": "array", "items": {"type": "string"}}}
 }

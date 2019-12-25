@@ -1,6 +1,6 @@
 {
     "type": "object",
-    "required": [],
+    "required": ["selectors"],
     "properties": {
         "queryable_fields": {"type": "array", "items": {"type": "string"}},
         "selectors": {"type": "array", "items": {"type": "string"}}

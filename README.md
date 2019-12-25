@@ -8,7 +8,7 @@ This is a web2py application. Please read the [web2py book](http://www.web2py.co
 
 ## To Do
 
-* API validation - In Progress
+* ~~API validation~~
 * Section validation
 * Page validation
 * Menu validation
@@ -19,6 +19,7 @@ This is a web2py application. Please read the [web2py book](http://www.web2py.co
 * Notification system
 * Move front end dependency to static directory
 * Front end utils refactor
+* Front end utils error handling
 * Complex JSON back end support
 * Complex JSON front end support
 * Better JSON schema

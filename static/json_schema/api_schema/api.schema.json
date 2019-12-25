@@ -10,6 +10,7 @@
         },
         "GET": {"$ref": "get.schema.json"},
         "POST": {"$ref": "post.schema.json"},
+        "PUT": {"$ref": "put.schema.json"},
         "DELETE": {"$ref": "delete.schema.json"}
     }
 }
