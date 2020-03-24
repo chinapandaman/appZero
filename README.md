@@ -9,7 +9,7 @@ This is a web2py application. Please read the [web2py book](http://www.web2py.co
 ## To Do
 
 * ~~API validation~~
-* Section validation
+* ~~Section validation~~
 * Page validation
 * Menu validation
 * Example app JSON
