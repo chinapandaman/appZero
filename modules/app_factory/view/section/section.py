@@ -20,7 +20,9 @@ class Section(AppZero):
             "{name}.json".format(name=param),
         )
         if not os.path.exists(self._definition_path):
-            raise HTTP(404)
+            raise HTTP(
+                404, "cannot locate section definition '{name}'".format(name=param)
+            )
         self._schema_name = "section.schema.json"
         self._schema_path = os.path.join(
             current.request.folder,
