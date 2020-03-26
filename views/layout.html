@@ -77,7 +77,7 @@
                                 <ul>
                                 {{for sub_item in item["sub_items"]:}}
                                 <li>
-                                    <a href="{{=sub_item['url']}}">{{=sub_item["text"]}}
+                                    <a href="{{=URL('default', 'index') + '?page=' + sub_item['page']}}">{{=sub_item["text"]}}
                                         {{if sub_item.get("decoration"):}}
                                         <span class="badge badge-pill badge-{{=sub_item['decoration']['type']}}">{{=sub_item['decoration']['text']}}</span>
                                         {{pass}}
@@ -88,7 +88,7 @@
                             </div>
                             {{else:}}
                             <li>
-                                <a href="{{=item['url']}}">
+                                <a href="{{=URL('default', 'index') + '?page=' + item['page']}}">
                                     <i class="fa {{=item['icon']}}"></i>
                                     <span>{{=item["text"]}}</span>
                                     {{if item.get("decoration"):}}

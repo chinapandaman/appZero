@@ -1,9 +1,9 @@
 {
     "type": "object",
-    "required": ["text", "url"],
+    "required": ["text", "page"],
     "properties": {
         "text": {"type": "string"},
-        "url": {"type": "string"},
+        "page": {"type": "string"},
         "decoration": {"$ref": "decoration.schema.json"}
     }
 }
