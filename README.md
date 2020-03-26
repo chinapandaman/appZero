@@ -11,7 +11,7 @@ This is a web2py application. Please read the [web2py book](http://www.web2py.co
 * ~~API validation~~
 * ~~Section validation~~
 * ~~Page validation~~
-* Menu validation
+* ~~Menu validation~~
 * Example app JSON
 * Example app builder
 * API developer view
