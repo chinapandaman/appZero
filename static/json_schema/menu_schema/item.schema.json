@@ -6,7 +6,7 @@
         "icon": {"type": "string"},
         "has_sub_item": {"type": "boolean"},
         "decoration": {"$ref": "decoration.schema.json"},
-        "url": {"type": "string"},
+        "page": {"type": "string"},
         "sub_items": {"type": "array", "items": {"$ref": "sub_item.schema.json"}}
     }
 }

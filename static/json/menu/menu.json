@@ -11,10 +11,10 @@
                     {
                         "text": "Dashboard 1",
                         "decoration": {"text": "Pro", "type": "success"},
-                        "url": "index"
+                        "page": "index"
                     },
-                    {"text": "Dashboard 2", "url": "index"},
-                    {"text": "Dashboard 3", "url": "index"}
+                    {"text": "Dashboard 2", "page": "index"},
+                    {"text": "Dashboard 3", "page": "index"}
                 ]
             },
             {
@@ -23,9 +23,9 @@
                 "has_sub_item": true,
                 "decoration": {"text": "3", "type": "danger"},
                 "sub_items": [
-                    {"text": "Products", "url": "index"},
-                    {"text": "Orders", "url": "index"},
-                    {"text": "Credit cart", "url": "index"}
+                    {"text": "Products", "page": "index"},
+                    {"text": "Orders", "page": "index"},
+                    {"text": "Credit cart", "page": "index"}
                 ]
             },
             {
@@ -33,11 +33,11 @@
                 "icon": "fa-gem",
                 "has_sub_item": true,
                 "sub_items": [
-                    {"text": "General", "url": "index"},
-                    {"text": "Panels", "url": "index"},
-                    {"text": "Tables", "url": "index"},
-                    {"text": "Icons", "url": "index"},
-                    {"text": "Forms", "url": "index"}
+                    {"text": "General", "page": "index"},
+                    {"text": "Panels", "page": "index"},
+                    {"text": "Tables", "page": "index"},
+                    {"text": "Icons", "page": "index"},
+                    {"text": "Forms", "page": "index"}
                 ]
             },
             {
@@ -45,10 +45,10 @@
                 "icon": "fa-chart-line",
                 "has_sub_item": true,
                 "sub_items": [
-                    {"text": "Pie Chart", "url": "index"},
-                    {"text": "Line Chart", "url": "index"},
-                    {"text": "Bar Chart", "url": "index"},
-                    {"text": "Histogram", "url": "index"}
+                    {"text": "Pie Chart", "page": "index"},
+                    {"text": "Line Chart", "page": "index"},
+                    {"text": "Bar Chart", "page": "index"},
+                    {"text": "Histogram", "page": "index"}
                 ]
             },
             {
@@ -56,8 +56,8 @@
                 "icon": "fa-globe",
                 "has_sub_item": true,
                 "sub_items": [
-                    {"text": "Google maps", "url": "index"},
-                    {"text": "Open street map", "url": "index"}
+                    {"text": "Google maps", "page": "index"},
+                    {"text": "Open street map", "page": "index"}
                 ]
             }
         ]
@@ -70,19 +70,19 @@
                 "icon": "fa-book",
                 "has_sub_item": false,
                 "decoration": {"text": "Beta", "type": "primary"},
-                "url": "index"
+                "page": "index"
             },
             {
                 "text": "Calendar",
                 "icon": "fa-calendar",
                 "has_sub_item": false,
-                "url": "index"
+                "page": "index"
             },
             {
                 "text": "Examples",
                 "icon": "fa-folder",
                 "has_sub_item": false,
-                "url": "index"
+                "page": "index"
             }
         ]
     }
