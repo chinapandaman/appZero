@@ -44,3 +44,12 @@ def download():
     http://..../[app]/default/download/[filename]
     """
     return response.download(request, db)
+
+
+@auth.requires_login()
+def jwt_dump():
+    response.cookies["_token"] = ""
+    response.cookies["_token"]["expires"] = 0
+    response.cookies["_token"]["path"] = "/"
+
+    redirect(URL("default", "user/logout"))
