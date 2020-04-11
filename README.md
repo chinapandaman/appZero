@@ -15,7 +15,7 @@ This is a web2py application. Please read the [web2py book](http://www.web2py.co
 * Example app JSON
 * Example app builder
 * API developer view
-* JWT vertical to horizontal scale
+* ~~JWT vertical to horizontal scale~~
 * Permission
 * Notification system
 * Move front end dependency to static directory
