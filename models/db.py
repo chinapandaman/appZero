@@ -116,6 +116,8 @@ auth.settings.actions_disabled.append("retrieve_password")
 auth.settings.actions_disabled.append("change_password")
 auth.settings.actions_disabled.append("bulk_register")
 
+auth.settings.expiration = configuration.get("session.expiration")
+
 # -------------------------------------------------------------------------
 # configure email
 # -------------------------------------------------------------------------
