@@ -38,6 +38,12 @@ if not request.env.web2py_runtime_gae:
         migrate_enabled=configuration.get("db.migrate"),
         check_reserved=["all"],
     )
+    session.connect(
+        request,
+        response,
+        cookie_key=configuration.get("session.secret"),
+        compression_level=None,
+    )
 else:
     # ---------------------------------------------------------------------
     # connect to Google BigTable (optional 'google:datastore://namespace')
