@@ -48,11 +48,43 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         let flash = "{{=response.flash}}";
-        if (flash){
+        if (flash) {
             toastr.error(flash);
         }
+
+        {{if request.args(0) == "login":}}
+        $("body > div.login > form > input.btn.btn-primary").click(function (e) {
+            let login_form = $("body > div.login > form");
+            e.preventDefault();
+
+            $.ajax({
+                url: "{{=URL('default', 'user/jwt')}}",
+                method: "GET",
+                data: {
+                    username: $("#auth_user_email").val(),
+                    password: $("#auth_user_password").val(),
+                },
+                success: function (data) {
+                    let new_expiration = new Date();
+                    let token_expiration =
+                        parseInt('{{=configuration.get("jwt.expiration")}}') * 1000;
+                    new_expiration.setTime(
+                        new_expiration.getTime() + token_expiration
+                    );
+                    let expires = "; expires=" + new_expiration.toUTCString();
+                    let path = "; path=/";
+
+                    document.cookie = "_token=" + data["token"] + expires + path;
+                    login_form.submit();
+                },
+                error: function () {
+                    login_form.submit();
+                },
+            });
+        });
+        {{pass}}
     });
 </script>
 </body>
