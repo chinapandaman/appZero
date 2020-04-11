@@ -8,7 +8,7 @@
     $(document).ready(function () {
         $.ajaxSetup({
             beforeSend: function (xhr) {
-                let cookies = document.cookie.split(";");
+                let cookies = document.cookie.split("; ");
                 let jwt_token = "";
 
                 for (let i = 0; i < cookies.length; i++) {
