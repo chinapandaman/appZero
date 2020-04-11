@@ -5,7 +5,22 @@
 {{include "utils/section_handler.html"}}
 {{include "utils/page_handler.html"}}
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
+        $.ajaxSetup({
+            beforeSend: function (xhr) {
+                let cookies = document.cookie.split(";");
+                let jwt_token = "";
+
+                for (let i = 0; i < cookies.length; i++) {
+                    let key = cookies[i].split("=")[0];
+                    if (key === "_token") {
+                        jwt_token = cookies[i].split("=")[1];
+                    }
+                }
+
+                xhr.setRequestHeader("Authorization", "Bearer " + jwt_token);
+            },
+        });
         page_master_handler();
     });
 </script>
