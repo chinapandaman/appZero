@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from app_factory.factory import AppZeroFactory
 from gluon import current
 # -------------------------------------------------------------------------
 # AppConfig configuration made easy. Look inside private/appconfig.ini
@@ -7,8 +8,6 @@ from gluon import current
 # -------------------------------------------------------------------------
 from gluon.contrib.appconfig import AppConfig
 from gluon.tools import Auth
-
-from app_factory.factory import AppZeroFactory
 
 # -------------------------------------------------------------------------
 # This scaffolding model makes your app work on Google App Engine too
@@ -91,7 +90,14 @@ response.form_label_separator = ""
 # -------------------------------------------------------------------------
 
 # host names must be a list of allowed host names (glob syntax allowed)
-auth = Auth(db, host_names=configuration.get("host.names"))
+auth = Auth(
+    db,
+    host_names=configuration.get("host.names"),
+    jwt={
+        "secret_key": configuration.get("jwt.secret"),
+        "expiration": configuration.get("jwt.expiration"),
+    },
+)
 
 # -------------------------------------------------------------------------
 # create all tables needed by auth, maybe add a list of extra fields

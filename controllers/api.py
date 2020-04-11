@@ -4,6 +4,7 @@
 from app_factory.factory import AppZeroFactory
 
 
+@auth.allows_jwt()
 @auth.requires_login()
 @request.restful()
 def template():
@@ -59,6 +60,7 @@ def template():
     return locals()
 
 
+@auth.allows_jwt()
 @auth.requires_login()
 @request.restful()
 def sections():
@@ -79,6 +81,7 @@ def sections():
     return locals()
 
 
+@auth.allows_jwt()
 @auth.requires_login()
 @request.restful()
 def pages():
