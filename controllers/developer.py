@@ -40,6 +40,7 @@ def index():
                     response_mapping[api_name]["GET"] = {
                         x["field_name"]: "<{}>".format(x["field_type"])
                         for x in table["table_fields"]
+                        if x["field_name"] in api_data["GET"]["selectors"]
                     }
                     response_mapping[api_name]["POST"] = "<id>"
                     response_mapping[api_name]["PUT"] = "<id>"
