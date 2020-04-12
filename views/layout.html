@@ -114,7 +114,7 @@
                 <i class="fa fa-envelope"></i>
                 <span class="badge badge-pill badge-success notification">7</span>
             </a>
-            <a href="#">
+            <a href="{{=URL('developer', 'index')}}">
                 <i class="fa fa-cog"></i>
                 <span class="badge-sonar"></span>
             </a>
@@ -144,6 +144,25 @@
         if (flash){
             toastr.info(flash);
         }
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.ajaxSetup({
+            beforeSend: function (xhr) {
+                let cookies = document.cookie.split("; ");
+                let jwt_token = "";
+
+                for (let i = 0; i < cookies.length; i++) {
+                    let key = cookies[i].split("=")[0];
+                    if (key === "_token") {
+                        jwt_token = cookies[i].split("=")[1];
+                    }
+                }
+
+                xhr.setRequestHeader("Authorization", "Bearer " + jwt_token);
+            },
+        });
     });
 </script>
 {{block page_js}}{{end page_js}}
