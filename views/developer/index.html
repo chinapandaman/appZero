@@ -1,1 +1,37 @@
 {{extend 'layout.html'}}
+
+<div class="container">
+    <ul class="list-unstyled">
+        {{for api in api_list:}}
+        <li>
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" href="#{{=api['api_name']}}_detail">
+                    <h4>{{=api["api_name"]}}</h4>
+                </div>
+                <div id="{{=api['api_name']}}_detail" class="collapse">
+                    <div class="card-body">
+                        {{for method in api["supported_methods"]:}}
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <span class="badge badge-{{=badge_mapping.get(method, 'primary')}}">{{=method}}</span>
+                                    {{=example_mapping.get(method, "").format(api_name=api["api_name"])}}
+                                </h5>
+                            </div>
+                        </div>
+                        {{pass}}
+                    </div>
+                </div>
+            </div>
+        </li>
+        {{pass}}
+    </ul>
+</div>
+
+{{block page_js}}
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    });
+</script>
+{{end page_js}}
