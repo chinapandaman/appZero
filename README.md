@@ -14,7 +14,7 @@ This is a web2py application. Please read the [web2py book](http://www.web2py.co
 * ~~Menu validation~~
 * Example app JSON
 * Example app builder
-* API developer view - In Progress
+* ~~API developer view~~
 * ~~JWT vertical to horizontal scale~~
 * Permission
 * Notification system
