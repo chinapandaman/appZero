@@ -20,6 +20,24 @@
                             </div>
                             <div class="collapse" id="{{=api['api_name']}}_{{=method}}_detail">
                                 <div class="card-body">
+                                    <h6>Request Specifications</h6>
+                                    <hr />
+                                    <table class="table table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{for k, v in request_mapping[api["api_name"]][method].items():}}
+                                            <tr>
+                                                <td>{{=k}}</td>
+                                                <td><kbd>{{=v}}</kbd></td>
+                                            </tr>
+                                            {{pass}}
+                                        </tbody>
+                                    </table>
                                     <h6>Successful Response</h6>
                                     <hr />
                                     <table class="table table-borderless">
