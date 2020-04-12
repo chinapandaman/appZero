@@ -12,11 +12,35 @@
                     <div class="card-body">
                         {{for method in api["supported_methods"]:}}
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header" data-toggle="collapse" href="#{{=api['api_name']}}_{{=method}}_detail">
                                 <h5>
                                     <span class="badge badge-{{=badge_mapping.get(method, 'primary')}}">{{=method}}</span>
                                     {{=example_mapping.get(method, "").format(api_name=api["api_name"])}}
                                 </h5>
+                            </div>
+                            <div class="collapse" id="{{=api['api_name']}}_{{=method}}_detail">
+                                <div class="card-body">
+                                    <h6>Responses</h6>
+                                    <hr />
+                                    <table class="table table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th>Code</th>
+                                                <th>Example</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>200</td>
+                                                <td>
+                                                    <kbd>
+                                                        {{=response_mapping[api["api_name"]][method]}}
+                                                    </kbd>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         {{pass}}

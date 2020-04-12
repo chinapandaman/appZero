@@ -24,14 +24,30 @@ def index():
         "DELETE": "/api/template/<id>?api_name={api_name}",
     }
 
+    response_mapping = {}
+    model_data = AppZeroFactory(layer="model", component="dal", db=db).build().data
+
     for each in os.listdir(os.path.join(request.folder, "static", "json", "api")):
         if each.endswith(".json"):
-            api_list.append(
-                AppZeroFactory(layer="api", component=each.split(".json")[0], db=db)
-                .build()
-                .data
+            api_name = each.split(".json")[0]
+            api_data = (
+                AppZeroFactory(layer="api", component=api_name, db=db).build().data
             )
+            api_list.append(api_data)
+            for table in model_data:
+                if table["table_name"] == api_data["table_name"]:
+                    response_mapping[api_name] = {}
+                    response_mapping[api_name]["GET"] = {
+                        x["field_name"]: "<{}>".format(x["field_type"])
+                        for x in table["table_fields"]
+                    }
+                    response_mapping[api_name]["POST"] = "<id>"
+                    response_mapping[api_name]["PUT"] = "<id>"
+                    response_mapping[api_name]["DELETE"] = "<id>"
 
     return dict(
-        api_list=api_list, badge_mapping=badge_mapping, example_mapping=example_mapping
+        api_list=api_list,
+        badge_mapping=badge_mapping,
+        example_mapping=example_mapping,
+        response_mapping=response_mapping,
     )
