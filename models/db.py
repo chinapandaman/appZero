@@ -2,6 +2,7 @@
 
 from app_factory.factory import AppZeroFactory
 from gluon import current
+
 # -------------------------------------------------------------------------
 # AppConfig configuration made easy. Look inside private/appconfig.ini
 # Auth is for authenticaiton and access control
@@ -117,6 +118,7 @@ auth.settings.actions_disabled.append("change_password")
 auth.settings.actions_disabled.append("bulk_register")
 
 auth.settings.expiration = configuration.get("session.expiration")
+auth.settings.logout_next = URL("default", "user")
 
 # -------------------------------------------------------------------------
 # configure email
@@ -196,5 +198,12 @@ for table in AppZeroFactory(layer="model", component="dal", db=db).build().data:
 # after defining tables, uncomment below to enable auditing
 # -------------------------------------------------------------------------
 # auth.enable_record_versioning(db)
+
+if "_token" in request.env.HTTP_COOKIE:
+    for each in request.env.HTTP_COOKIE.split("; "):
+        if each.startswith("_token"):
+            request.vars["_token"] = each.split("=")[1]
+            break
+
 current.request = request
 current.db = db
