@@ -6,6 +6,7 @@ import os
 from app_factory.factory import AppZeroFactory
 
 
+@auth.allows_jwt()
 @auth.requires_login()
 def index():
     api_list = []

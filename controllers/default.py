@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
+@auth.allows_jwt()
 @auth.requires_login()
 def index():
     return dict()
@@ -37,6 +38,7 @@ def user():
 
 
 @cache.action()
+@auth.allows_jwt()
 @auth.requires_login()
 def download():
     """
@@ -46,6 +48,7 @@ def download():
     return response.download(request, db)
 
 
+@auth.allows_jwt()
 @auth.requires_login()
 def jwt_dump():
     response.cookies["_token"] = ""
