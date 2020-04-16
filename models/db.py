@@ -2,6 +2,7 @@
 
 from app_factory.factory import AppZeroFactory
 from gluon import current
+
 # -------------------------------------------------------------------------
 # AppConfig configuration made easy. Look inside private/appconfig.ini
 # Auth is for authenticaiton and access control
@@ -198,6 +199,7 @@ for table in AppZeroFactory(layer="model", component="dal", db=db).build().data:
 # -------------------------------------------------------------------------
 # auth.enable_record_versioning(db)
 
+request.vars["_token"] = ""
 if request.env.HTTP_COOKIE and "_token" in request.env.HTTP_COOKIE:
     for each in request.env.HTTP_COOKIE.split("; "):
         if each.startswith("_token"):
