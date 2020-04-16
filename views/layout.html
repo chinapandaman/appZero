@@ -38,7 +38,7 @@
                 </div>
                 <div class="user-info">
                     <span class="user-name">{{=auth.user.first_name}} <strong>{{=auth.user.last_name}}</strong></span>
-                    <span class="user-role">{{=auth.user_groups[1]}}</span>
+                    <span class="user-role">{{=auth.user_groups[next(iter(auth.user_groups))]}}</span>
                     <span class="user-status">
                         <i class="fa fa-circle"></i>
                         <span>Online</span>
