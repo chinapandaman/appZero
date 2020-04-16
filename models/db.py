@@ -199,7 +199,8 @@ for table in AppZeroFactory(layer="model", component="dal", db=db).build().data:
 # -------------------------------------------------------------------------
 # auth.enable_record_versioning(db)
 
-if "_token" in request.env.HTTP_COOKIE:
+request.vars["_token"] = ""
+if request.env.HTTP_COOKIE and "_token" in request.env.HTTP_COOKIE:
     for each in request.env.HTTP_COOKIE.split("; "):
         if each.startswith("_token"):
             request.vars["_token"] = each.split("=")[1]
