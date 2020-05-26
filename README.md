@@ -28,3 +28,4 @@ This is a web2py application. Please read the [web2py book](http://www.web2py.co
 * ~~PDF engine~~
 * Utility tests
 * Web2py tests
+* Docker Setup
